@@ -1,4 +1,6 @@
+import sys
 import threading
+from pathlib import Path
 from time import sleep
 
 import schedule
@@ -34,6 +36,10 @@ from fatoshistoricos.handlers.prase_channel import *
 from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
+
+current_path = Path(__file__).resolve().parent
+sys.path.append(str(current_path.parent))
+
 
 bot.add_message_handler(cmd_start)
 bot.add_message_handler(cmd_help)
