@@ -1,23 +1,30 @@
-import sys
 import threading
-from pathlib import Path
 from time import sleep
 
 import schedule
 from telebot import util
 
 from fatoshistoricos.bot.bot import bot
-from fatoshistoricos.commands.admin import (commands_fwdoff, commands_fwdon,
-                                            commands_settopic,
-                                            commands_unsettopic)
+from fatoshistoricos.commands.admin import (
+    commands_fwdoff,
+    commands_fwdon,
+    commands_settopic,
+    commands_unsettopic,
+)
 from fatoshistoricos.commands.fotoshist import fotos_hist
 from fatoshistoricos.commands.help import cmd_help
 from fatoshistoricos.commands.send import commands_sendff, commands_sendon
 from fatoshistoricos.commands.start import cmd_start
-from fatoshistoricos.commands.sudo import (add_sudo, commands_sudo, grupos,
-                                           handle_broadcast_chat,
-                                           handle_broadcast_pv, list_devs,
-                                           stats, unsudo_command)
+from fatoshistoricos.commands.sudo import (
+    add_sudo,
+    commands_sudo,
+    grupos,
+    handle_broadcast_chat,
+    handle_broadcast_pv,
+    list_devs,
+    stats,
+    unsudo_command,
+)
 from fatoshistoricos.config import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
@@ -36,9 +43,6 @@ from fatoshistoricos.handlers.prase_channel import *
 from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
-
-current_path = Path(__file__).resolve().parent
-sys.path.append(str(current_path.parent / 'fatoshistoricos'))
 
 bot.add_message_handler(cmd_start)
 bot.add_message_handler(cmd_help)
