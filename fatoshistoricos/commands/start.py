@@ -54,7 +54,7 @@ def cmd_start(message):
         markup.add(config_pv)
 
         photo = 'https://i.imgur.com/j3H3wvJ.png'
-        msg_start = f"Olá, <b>{first_name}</b>!\n\nEu sou <b>Fatos Históricos</b>, sou um bot que envia diariamente mensagens com acontecimentos históricos que ocorreram no dia do envio da mensagem.\n\nO envio da mensagem no chat privado é automático. Se você desejar parar de receber, digite /sendoff. Se quiser voltar a receber, digite /sendon\n\n<b>A mensagem é enviada todos os dias às 8 horas</b>\n\nAdicione-me em seu grupo para receber as mensagens lá.\n\n<b>Comandos:</b> /help\n\n📦<b>Meu código-fonte:</b> <a href='https://github.com/leviobrabo/fatoshistoricos'>GitHub</a>"
+        msg_start = f"Olá, <b>{first_name}</b>!\n\nEu sou <b>Fatos Históricos</b>, sou um bot que envia diariamente mensagens com acontecimentos históricos que ocorreram no dia do envio da mensagem.\n\nO envio da mensagem no chat privado é automático. Se você desejar parar de receber, digite /sendoff. Se quiser voltar a receber, digite /sendon\n\n<b>A mensagem é enviada todos os dias às 8 horas</b>\n\nAdicione-me em seu grupo para receber as mensagens lá.\n\n<b>Comandos:</b> /help\n\n📦<b>Meu código-fonte:</b> <a href='https://github.com/leviobrabo/fatoshisbot'>GitHub</a>"
 
         bot.send_photo(
             message.chat.id,
