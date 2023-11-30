@@ -72,7 +72,7 @@ def send_historical_events_group_image(chat_id):
 
 def hist_image_chat_job():
     try:
-        chat_models = get_all_chats()
+        chat_models = get_all_chats({'forwarding': 'true'})
         for chat_model in chat_models:
             chat_id = chat_model['chat_id']
             if chat_id != GROUP_LOG:

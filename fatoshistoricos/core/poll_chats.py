@@ -59,7 +59,7 @@ def send_question_chat():
 
         events = json_events[f'{today.month}-{today.day}']
 
-        all_chats = get_all_chats()
+        all_chats = get_all_chats({'forwarding': 'true'})
 
         for chat in all_chats:
             chat_id = chat['chat_id']
