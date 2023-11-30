@@ -1,6 +1,6 @@
-import os
 import sys
 import threading
+from pathlib import Path
 from time import sleep
 
 import schedule
@@ -37,9 +37,8 @@ from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
 
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(parent_dir)
-
+current_path = Path(__file__).resolve().parent
+sys.path.append(str(current_path.parent / 'fatoshistoricos'))
 
 bot.add_message_handler(cmd_start)
 bot.add_message_handler(cmd_help)
