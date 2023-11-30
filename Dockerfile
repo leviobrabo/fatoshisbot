@@ -14,6 +14,6 @@ RUN pip3 install -U setuptools wheel && \
     pip3 install --no-cache-dir -r requirements.txt
 
 COPY fatoshistoricos.py .
-COPY bot.conf .
+COPY sample.bot.conf bot.conf
 
 CMD ["python3", "-m", "fatoshistoricos"]
