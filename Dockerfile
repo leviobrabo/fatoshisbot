@@ -15,6 +15,5 @@ RUN pip3 install -U setuptools wheel && \
 
 COPY fatoshistoricos/ /app/fatoshistoricos/
 COPY main.py .
-COPY sample.bot.conf bot.conf
 
 CMD ["python3", "-m", "main"]
