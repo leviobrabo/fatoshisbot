@@ -10,14 +10,9 @@
   ],
   "website": "https://github.com/leviobrabo/fatoshisbot",
   "success_url": "https://t.me/fatoshistbot",
-  "env": {
+  "FATOSHIST": {
     "TOKEN": {
       "description": "Make a bot at BotFather http://telegram.dog/BotFather and get the token of your bot",
-      "value": "",
-      "required": true
-    },
-    "MONGO_CON=": {
-      "description": "Create database ate MongoDB Atlas https://www.mongodb.com/ create new cluster and get url for connection.",
       "value": "",
       "required": true
     },
@@ -46,13 +41,22 @@
       "value": "",
       "required": true
     },
+    "OWNER_ID": {
+      "description": "owner id Telegram",
+      "value": "",
+      "required": true
+    }
+  },
+  "LOG": {
     "LOG_PATH": {
       "description": "Path to the log-file",
       "value": "",
       "required": true
-    },
-    "OWNER_ID": {
-      "description": "owner id Telegram",
+    }
+  },
+  "DB": {
+    "MONGO_CON": {
+      "description": "Create database at MongoDB Atlas https://www.mongodb.com/ create new cluster and get url for connection.",
       "value": "",
       "required": true
     }
