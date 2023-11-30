@@ -1,0 +1,60 @@
+{
+  "name": "Fatos Históricos",
+  "description": "'Fatos Históricos' é um Bot que envia fatos históricos de cada dia do mês",
+  "repository": "https://github.com/leviobrabo/fatoshisbot",
+  "logo": "https://i.imgur.com/XXxV74z.jpeg",
+  "keywords": [
+    "python",
+    "fatos_históricos",
+    "telegrambot"
+  ],
+  "website": "https://github.com/leviobrabo/fatoshisbot",
+  "success_url": "https://t.me/fatoshistbot",
+  "env": {
+    "TOKEN": {
+      "description": "Make a bot at BotFather http://telegram.dog/BotFather and get the token of your bot",
+      "value": "",
+      "required": true
+    },
+    "MONGO_CON=": {
+      "description": "Create database ate MongoDB Atlas https://www.mongodb.com/ create new cluster and get url for connection.",
+      "value": "",
+      "required": true
+    },
+    "HIST_LOG": {
+      "description": "Group ID LOG Telegram.",
+      "value": "",
+      "required": true
+    },
+    "HIST_CHANNEL": {
+      "description": "Channel ID post Telegram.",
+      "value": "",
+      "required": true
+    },
+    "HIST_CHANNEL_POST": {
+      "description": "Channel ID post Telegram Status.",
+      "value": "",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "BOT NAME",
+      "value": "",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "BOT USERNAME",
+      "value": "",
+      "required": true
+    },
+    "LOG_PATH": {
+      "description": "Path to the log-file",
+      "value": "",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "owner id Telegram",
+      "value": "",
+      "required": true
+    }
+  }
+}
