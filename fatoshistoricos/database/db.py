@@ -60,11 +60,20 @@ def search_user(user_id):
     return db.users.find_one({'user_id': user_id})
 
 
+def search_hits(hits):
+    return db.users.find_one({'hits': hits})
+
+
+def search_questions(questions):
+    return db.users.find_one({'questions': questions})
+
+
 def get_all_users(query=None):
     if query:
         return db.users.find(query)
     else:
         return db.users.find({})
+
 
 def set_user_message_id(user_id, message_id):
     return db.users.update_one(

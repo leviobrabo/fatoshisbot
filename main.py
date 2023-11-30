@@ -5,26 +5,17 @@ import schedule
 from telebot import util
 
 from fatoshistoricos.bot.bot import bot
-from fatoshistoricos.commands.admin import (
-    commands_fwdoff,
-    commands_fwdon,
-    commands_settopic,
-    commands_unsettopic,
-)
+from fatoshistoricos.commands.admin import (commands_fwdoff, commands_fwdon,
+                                            commands_settopic,
+                                            commands_unsettopic)
 from fatoshistoricos.commands.fotoshist import fotos_hist
 from fatoshistoricos.commands.help import cmd_help
 from fatoshistoricos.commands.send import commands_sendff, commands_sendon
 from fatoshistoricos.commands.start import cmd_start
-from fatoshistoricos.commands.sudo import (
-    add_sudo,
-    commands_sudo,
-    grupos,
-    handle_broadcast_chat,
-    handle_broadcast_pv,
-    list_devs,
-    stats,
-    unsudo_command,
-)
+from fatoshistoricos.commands.sudo import (add_sudo, commands_sudo, grupos,
+                                           handle_broadcast_chat,
+                                           handle_broadcast_pv, list_devs,
+                                           stats, unsudo_command)
 from fatoshistoricos.config import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
@@ -311,7 +302,7 @@ def callback_handler(call):
                 '↩️ Voltar', callback_data='menu_start'
             )
             markup.add(back_to_home)
-            msg_text = 'como usar o bot'
+            msg_text = 'como usar o bot (Em desenvolvimento)'
             photo = 'https://i.imgur.com/j3H3wvJ.png'
             bot.edit_message_media(
                 chat_id=call.message.chat.id,
@@ -328,16 +319,38 @@ def callback_handler(call):
                 '↩️ Voltar', callback_data='menu_start'
             )
             markup.add(back_to_home)
-            msg_text = 'Sua conta'
-            photo = 'https://i.imgur.com/j3H3wvJ.png'
-            bot.edit_message_media(
-                chat_id=call.message.chat.id,
-                message_id=call.message.message_id,
-                media=types.InputMediaPhoto(
-                    media=photo, caption=msg_text, parse_mode='HTML'
-                ),
-                reply_markup=markup,
-            )
+
+            # Obtendo informações do usuário a partir do banco de dados
+            user_info = search_user(user_id)
+            if user_info:
+                # Construindo a mensagem com as informações do usuário
+                msg_text = f'Sua conta\n\n'
+                msg_text += f'Nome: {user_info["first_name"]}\n'
+                if user_info.get('username'):
+                    msg_text += f'Username: @{user_info["username"]}\n'
+                msg_text += f'Sudo: {"Sim" if user_info["sudo"] == "true" else "Não"}\n'
+                msg_text += f'Receber mensagem no chat privado: {user_info["msg_private"]}\n'
+                msg_text += f'Hits: {user_info["hits"]}\n'
+                msg_text += f'Questions: {user_info["questions"]}\n'
+
+                # Cálculo da porcentagem de acerto por questões
+                if user_info['questions'] > 0:
+                    percentage = (
+                        user_info['hits'] / user_info['questions']
+                    ) * 100
+                    msg_text += f'Porcentagem de acerto por questões: {percentage:.2f}%\n'
+                else:
+                    msg_text += f'Porcentagem de acerto por questões: 0\n'
+
+                photo = 'https://i.imgur.com/j3H3wvJ.png'
+                bot.edit_message_media(
+                    chat_id=call.message.chat.id,
+                    message_id=call.message.message_id,
+                    media=types.InputMediaPhoto(
+                        media=photo, caption=msg_text, parse_mode='HTML'
+                    ),
+                    reply_markup=markup,
+                )
         elif call.data.startswith('commands'):
             user_id = call.from_user.id
             markup = types.InlineKeyboardMarkup()
