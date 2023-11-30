@@ -320,28 +320,23 @@ def callback_handler(call):
             )
             markup.add(back_to_home)
 
-            # Obtendo informações do usuário a partir do banco de dados
             user_info = search_user(user_id)
             if user_info:
-                # Construindo a mensagem com as informações do usuário
-                msg_text = f'Sua conta\n\n'
-                msg_text += f'Nome: {user_info["first_name"]}\n'
-                if user_info.get('username'):
-                    msg_text += f'Username: @{user_info["username"]}\n'
-                msg_text += f'Sudo: {"Sim" if user_info["sudo"] == "true" else "Não"}\n'
-                msg_text += f'Receber mensagem no chat privado: {user_info["msg_private"]}\n'
-                msg_text += f'Hits: {user_info["hits"]}\n'
-                msg_text += f'Questions: {user_info["questions"]}\n'
+                msg_text = f'<b>Sua conta</b>\n\n'
+                msg_text += f'<b>Nome:</b> {user_info["first_name"]}\n'
+                if user_info.get("username"):
+                    msg_text += f'<b>Username:</b> @{user_info["username"]}\n'
+                msg_text += f'<b>Sudo:</b> {"Sim" if user_info["sudo"] == "true" else "Não"}\n'
+                msg_text += f'<b>Recebe mensagem no chat privado:</b>  {"Sim" if user_info["msg_private"] == "true" else "Não"}\n'
+                msg_text += f'<b>Acertos:</b> <code>{user_info["hits"]}</code>\n'
+                msg_text += f'<b>Questões:</b> <code>{user_info["questions"]}</code>\n'
 
-                # Cálculo da porcentagem de acerto por questões
-                if user_info['questions'] > 0:
-                    percentage = (
-                        user_info['hits'] / user_info['questions']
-                    ) * 100
-                    msg_text += f'Porcentagem de acerto por questões: {percentage:.2f}%\n'
+                if user_info["questions"] > 0:
+                    percentage = (user_info["hits"] /
+                                  user_info["questions"]) * 100
+                    msg_text += f'<b>Porcentagem de acerto por questões:</b> <code>{percentage:.2f}%</code>\n'
                 else:
-                    msg_text += f'Porcentagem de acerto por questões: 0\n'
-
+                    msg_text += f'Porcentagem de acerto por questões: <code>0%</code>\n'
                 photo = 'https://i.imgur.com/j3H3wvJ.png'
                 bot.edit_message_media(
                     chat_id=call.message.chat.id,
