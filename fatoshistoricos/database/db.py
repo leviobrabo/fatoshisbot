@@ -60,9 +60,11 @@ def search_user(user_id):
     return db.users.find_one({'user_id': user_id})
 
 
-def get_all_users():
-    return db.users.find({})
-
+def get_all_users(query=None):
+    if query:
+        return db.users.find(query)
+    else:
+        return db.users.find({})
 
 def set_user_message_id(user_id, message_id):
     return db.users.update_one(
@@ -133,8 +135,11 @@ def search_group(chat_id):
     return db.chats.find_one({'chat_id': chat_id})
 
 
-def get_all_chats():
-    return db.chats.find({})
+def get_all_chats(query=None):
+    if query:
+        return db.chats.find(query)
+    else:
+        return db.chats.find({})
 
 
 def remove_chat_db(chat_id):
