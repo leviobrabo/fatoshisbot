@@ -38,7 +38,7 @@ def send_historical_events_channel(CHANNEL):
         logger.info('-' * 50)
 
 
-def hist_channel():
+def hist_channel_events():
     try:
         send_historical_events_channel(CHANNEL)
         logger.info('-' * 50)

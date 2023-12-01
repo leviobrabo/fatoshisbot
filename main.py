@@ -147,7 +147,7 @@ schedule.every().day.at('08:30').do(hist_user_job)
 
 # Envio eventos histórico no channel
 
-schedule.every().day.at('05:00').do(hist_channel)
+schedule.every().day.at('05:00').do(hist_channel_events)
 
 # Envio dos mortos do dia no canal
 
