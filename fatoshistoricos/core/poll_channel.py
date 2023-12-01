@@ -41,7 +41,7 @@ def send_question():
         events = json_events[f'{today.month}-{today.day}']
 
         # Verificar o horário e enviar a pergunta correspondente
-        if current_time.hour == 9 and current_time.minute == 10:
+        if current_time.hour == 9 and current_time.minute == 30:
             send_poll(
                 CHANNEL_POST,
                 events['pergunta1']['enunciado'],
@@ -52,7 +52,7 @@ def send_question():
                 events['pergunta1'].get('explicacao', ''),
             )
 
-        elif current_time.hour == 11 and current_time.minute == 20:
+        elif current_time.hour == 11 and current_time.minute == 30:
             send_poll(
                 CHANNEL_POST,
                 events['pergunta2']['enunciado'],
@@ -63,7 +63,7 @@ def send_question():
                 events['pergunta2'].get('explicacao', ''),
             )
 
-        elif current_time.hour == 15 and current_time.minute == 30:
+        elif current_time.hour == 14 and current_time.minute == 00:
             send_poll(
                 CHANNEL_POST,
                 events['pergunta3']['enunciado'],
@@ -74,7 +74,7 @@ def send_question():
                 events['pergunta3'].get('explicacao', ''),
             )
 
-        elif current_time.hour == 17 and current_time.minute == 40:
+        elif current_time.hour == 18 and current_time.minute == 30:
             send_poll(
                 CHANNEL_POST,
                 events['pergunta4']['enunciado'],

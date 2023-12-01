@@ -394,11 +394,9 @@ def schedule_thread():
 polling_thread = threading.Thread(target=polling_thread)
 schedule_thread = threading.Thread(target=schedule_thread)
 
-polling_thread.start()
-schedule_thread.start()
 
 try:
-    polling_thread.join()
-    schedule_thread.join()
+    polling_thread.start()
+    schedule_thread.start()
 except Exception as e:
     pass
