@@ -132,13 +132,21 @@ def handle_poll_answer(poll_answer):
         option_id = poll_answer.option_ids[0]
 
         poll_db = search_poll(poll_id)
-        correto = poll_db.get('correct_option_id')
+        correto = None
+
+        try:
+            if poll_db:
+                correto = poll_db.get('correct_option_id')
+        except AttributeError as e:
+            logger.info('-' * 50)
+            logger.warning(f'Erro ao obter a opção correta da enquete: {e}')
+            logger.info('-' * 50)
 
         user = search_user(user_id)
         if not user:
             add_new_user(user_id, first_name, last_name, username)
 
-        if option_id == correto:
+        if correto is not None and option_id == correto:
             set_hit_user(user_id)
             set_questions_user(user_id)
 
@@ -150,7 +158,9 @@ def handle_poll_answer(poll_answer):
 
 def remove_all_poll():
     try:
+        logger.info('-' * 50)
         logger.success('Removido as polls do banco de dados!')
+        logger.info('-' * 50)
         remove_all_poll_db()
     except Exception as e:
         logger.info('-' * 50)

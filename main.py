@@ -134,7 +134,7 @@ schedule.every().day.at('18:00').do(send_question_chat)
 
 # Remove polls do banco de dados
 
-schedule.every().day.at('00:00').do(remove_all_poll)
+# schedule.every().day.at('00:00').do(remove_all_poll)
 
 
 # Envio eventos histórico no chats
