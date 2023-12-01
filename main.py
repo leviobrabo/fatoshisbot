@@ -120,7 +120,7 @@ def set_my_configs():
 # Envio das poll channel
 
 
-schedule.every().day.at('08:30').do(send_question)
+schedule.every().day.at('09:30').do(send_question)
 schedule.every().day.at('11:30').do(send_question)
 schedule.every().day.at('14:00').do(send_question)
 schedule.every().day.at('18:30').do(send_question)
@@ -128,9 +128,9 @@ schedule.every().day.at('18:30').do(send_question)
 # Envio das poll chats
 
 schedule.every().day.at('10:30').do(send_question_chat)
-schedule.every().day.at('14:30').do(send_question_chat)
+schedule.every().day.at('13:30').do(send_question_chat)
 schedule.every().day.at('16:30').do(send_question_chat)
-schedule.every().day.at('21:30').do(send_question_chat)
+schedule.every().day.at('18:00').do(send_question_chat)
 
 # Remove polls do banco de dados
 
