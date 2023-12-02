@@ -15,18 +15,11 @@ def get_curiosity(CHANNEL):
         today = datetime.now()
         day = today.day
         month = today.month
-        with open(
-            './fatoshistoricos/data/curiosidade.json', 'r', encoding='utf-8'
-        ) as file:
+        with open('./fatoshistoricos/data/curiosidade.json', 'r', encoding='utf-8') as file:
             json_events = json.load(file)
-            curiosidade = json_events.get(f'{month}-{day}', {}).get(
-                'curiosidade', []
-            )
+            curiosidade = json_events.get(f'{month}-{day}', {})
             if curiosidade:
-                info = curiosidade[0].get('texto', '')
-
-                # Para 2025 (descomente esta linha e comente a linha acima)
-                # info = curiosidade[1].get("texto1", "")
+                info = curiosidade.get('texto', '')  
 
                 message = f'<b>Curiosidades Históricas 📜</b>\n\n{info}\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
