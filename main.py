@@ -381,7 +381,7 @@ def polling_thread():
     logger.info('-' * 50)
     logger.success('Start polling...')
     logger.info('-' * 50)
-    bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True)
+    bot.polling(allowed_updates=util.update_types)
 
 
 def schedule_thread():
