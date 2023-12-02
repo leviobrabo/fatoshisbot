@@ -385,7 +385,7 @@ def callback_handler(call):
                 '/fwdoff - desativa o encaminhamento no grupo\n'
                 '/fwdon - ativa o encaminhamento no grupo\n'
                 '/settopic - definir um chat como tópico para receber as mensagens diárias\n'
-                '/cleartopic - remove um chat como tópico para receber as mensagens diárias (retorna para o General)\n'
+                '/unsettpoic - remove um chat como tópico para receber as mensagens diárias (retorna para o General)\n'
             )
             photo = 'https://i.imgur.com/j3H3wvJ.png'
             bot.edit_message_media(
