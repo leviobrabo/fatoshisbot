@@ -65,16 +65,25 @@ def set_my_configs():
     try:
         bot.set_my_commands(
             [
-                types.BotCommand('/start', 'start'),
-                types.BotCommand('/help', 'help'),
+                types.BotCommand('/start', 'Iniciar'),
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+                types.BotCommand('/help', 'Ajuda'),
+                types.BotCommand(
+                    '/sendon', 'Receberá às 8 horas a mensagem diária'
+                ),
+                types.BotCommand(
+                    '/sendoff', 'Não receberá às 8 horas a mensagem diária'
+                ),
             ],
             scope=types.BotCommandScopeAllPrivateChats(),
         )
     except Exception as ex:
         logger.error(ex)
-    for sudo in sudos:
-        try:
 
+    sudo_list = sudos()
+
+    for sudo in sudo_list:
+        try:
             bot.set_my_commands(
                 [
                     types.BotCommand('/sys', 'Uso do servidor'),
@@ -98,8 +107,7 @@ def set_my_configs():
     try:
         bot.set_my_commands(
             [
-                types.BotCommand('/start', 'start'),
-                types.BotCommand('/help', 'help'),
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
             ],
             scope=types.BotCommandScopeAllGroupChats(),
         )
@@ -108,8 +116,19 @@ def set_my_configs():
     try:
         bot.set_my_commands(
             [
-                types.BotCommand('/start', 'start'),
-                types.BotCommand('/help', 'help'),
+                types.BotCommand(
+                    '/settopic',
+                    'definir um chat como tópico para receber as mensagens diárias',
+                ),
+                types.BotCommand(
+                    '/unsettopic',
+                    'remove um chat como tópico para receber as mensagens diárias (retorna para o General)',
+                ),
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+                types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
+                types.BotCommand(
+                    '/fwdoff', 'desativa o encaminhamento no grupo'
+                ),
             ],
             scope=types.BotCommandScopeChatAdministrators(),
         )
@@ -122,7 +141,7 @@ def set_my_configs():
 
 schedule.every().day.at('09:30').do(send_question)
 schedule.every().day.at('11:30').do(send_question)
-schedule.every().day.at('14:00').do(send_question)
+schedule.every().day.at('14:10').do(send_question)
 schedule.every().day.at('18:30').do(send_question)
 
 # Envio das poll chats
@@ -176,15 +195,15 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-schedule.every().day.at('10:00').do(hist_channel_curiosity)
+# schedule.every().day.at('10:00').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
-schedule.every().day.at('21:30').do(hist_channel_frase)
+# schedule.every().day.at('21:30').do(hist_channel_frase)
 
 # Enivo dos presidentes no canal
 
-schedule.every().day.at('20:00').do(enviar_foto_presidente)
+# schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -324,16 +343,21 @@ def callback_handler(call):
             if user_info:
                 msg_text = f'<b>Sua conta</b>\n\n'
                 msg_text += f'<b>Nome:</b> {user_info["first_name"]}\n'
-                if user_info.get("username"):
+                if user_info.get('username'):
                     msg_text += f'<b>Username:</b> @{user_info["username"]}\n'
                 msg_text += f'<b>Sudo:</b> {"Sim" if user_info["sudo"] == "true" else "Não"}\n'
                 msg_text += f'<b>Recebe mensagem no chat privado:</b>  {"Sim" if user_info["msg_private"] == "true" else "Não"}\n'
-                msg_text += f'<b>Acertos:</b> <code>{user_info["hits"]}</code>\n'
-                msg_text += f'<b>Questões:</b> <code>{user_info["questions"]}</code>\n'
+                msg_text += (
+                    f'<b>Acertos:</b> <code>{user_info["hits"]}</code>\n'
+                )
+                msg_text += (
+                    f'<b>Questões:</b> <code>{user_info["questions"]}</code>\n'
+                )
 
-                if user_info["questions"] > 0:
-                    percentage = (user_info["hits"] /
-                                  user_info["questions"]) * 100
+                if user_info['questions'] > 0:
+                    percentage = (
+                        user_info['hits'] / user_info['questions']
+                    ) * 100
                     msg_text += f'<b>Porcentagem de acerto por questões:</b> <code>{percentage:.2f}%</code>\n'
                 else:
                     msg_text += f'Porcentagem de acerto por questões: <code>0%</code>\n'

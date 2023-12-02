@@ -1,7 +1,6 @@
 import json
 from datetime import datetime
 
-
 from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.config import *
 from fatoshistoricos.database.db import *
@@ -15,7 +14,9 @@ def get_curiosity(CHANNEL):
         today = datetime.now()
         day = today.day
         month = today.month
-        with open('./fatoshistoricos/data/curiosidade.json', 'r', encoding='utf-8') as file:
+        with open(
+            './fatoshistoricos/data/curiosidade.json', 'r', encoding='utf-8'
+        ) as file:
             json_events = json.load(file)
             curiosidade = json_events.get(f'{month}-{day}', {})
             if curiosidade:
