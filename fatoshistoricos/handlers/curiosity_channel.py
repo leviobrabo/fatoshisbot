@@ -1,7 +1,6 @@
 import json
 from datetime import datetime
 
-import pytz
 
 from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.config import *
@@ -13,10 +12,9 @@ from fatoshistoricos.utils.month import *
 
 def get_curiosity(CHANNEL):
     try:
-        today = datetime.now(pytz.timezone('America/Sao_Paulo'))
+        today = datetime.now()
         day = today.day
         month = today.month
-        print(f'{month}-{day}')
         with open(
             './fatoshistoricos/data/curiosidade.json', 'r', encoding='utf-8'
         ) as file:
@@ -32,7 +30,6 @@ def get_curiosity(CHANNEL):
 
                 message = f'<b>Curiosidades Históricas 📜</b>\n\n{info}\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
-                print(info)
             else:
                 logger.info('-' * 50)
                 logger.info('Não há informações para o dia de hoje.')
