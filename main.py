@@ -176,7 +176,7 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-schedule.every().day.at('10:00').do(hist_channel_curiosity)
+schedule.every().day.at('17:44').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
