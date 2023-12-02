@@ -19,7 +19,7 @@ def get_curiosity(CHANNEL):
             json_events = json.load(file)
             curiosidade = json_events.get(f'{month}-{day}', {})
             if curiosidade:
-                info = curiosidade.get('texto', '')  
+                info = curiosidade.get('texto', '')
 
                 message = f'<b>Curiosidades Históricas 📜</b>\n\n{info}\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
