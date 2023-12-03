@@ -44,14 +44,14 @@ def enviar_foto_presidente():
                 logger.info(
                     'Atualizando informações do último presidente para a data atual.')
                 logger.info('-' * 50)
-                db.presidentes.update_one(
-                    {'date': ultimo_presidente['date']},
-                    {'$set': {'date': today_str}, '$inc': {'id': 1}}
-                )
 
                 proximo_id = ultimo_id + 1
                 proximo_presidente = presidentes.get(str(proximo_id))
                 if proximo_presidente:
+                    db.presidentes.update_one(
+                        {'date': ultimo_presidente['date']},
+                        {'$set': {'date': today_str}, '$inc': {'id': 1}}
+                    )
                     enviar_info_pelo_canal(proximo_presidente)
                 else:
                     logger.info('-' * 50)
