@@ -96,8 +96,7 @@ def set_my_configs():
 
     all_users = get_all_users()
     for user in all_users:
-        if sudos(user):
-            user_id = user.get('user_id')
+        if sudos(user.get('user_id')):
             try:
                 bot.set_my_commands([
                     types.BotCommand('/sys', 'Uso do servidor'),
@@ -109,7 +108,7 @@ def set_my_configs():
                         '/bcusers', 'Enviar msg broadcast para usuários'),
                     types.BotCommand(
                         '/bcgps', 'Enviar msg broadcast para grupos'),
-                ], scope=types.BotCommandScopeChat(chat_id=user_id))
+                ], scope=types.BotCommandScopeChat(chat_id=user.get('user_id')))
             except Exception as ex:
                 logger.error(ex)
 
