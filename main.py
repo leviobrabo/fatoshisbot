@@ -195,15 +195,15 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-# schedule.every().day.at('10:00').do(hist_channel_curiosity)
+schedule.every().day.at('10:00').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
-# schedule.every().day.at('21:30').do(hist_channel_frase)
+schedule.every().day.at('21:30').do(hist_channel_frase)
 
 # Enivo dos presidentes no canal
 
-# schedule.every().day.at('20:00').do(enviar_foto_presidente)
+schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -420,6 +420,7 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
+    set_my_configs()
     polling_thread.start()
     schedule_thread.start()
 except Exception as e:
