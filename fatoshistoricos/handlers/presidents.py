@@ -35,16 +35,24 @@ def enviar_foto_presidente():
                 ultimo_presidente['date'], '%Y-%m-%d'
             )
 
-            proximo_id = int(ultimo_id) + 1
-            proxima_data = data_envio + timedelta(days=1)
-
             today = datetime.now(pytz.timezone('America/Sao_Paulo'))
-            if proxima_data.date() == today.date():
+            today_str = today.strftime('%Y-%m-%d')
+
+            if ultimo_presidente['date'] != today_str:
+                # Atualiza o registro existente para a data atual e aumenta o ID em 1
+                logger.info('-' * 50)
+                logger.info(
+                    'Atualizando informações do último presidente para a data atual.')
+                logger.info('-' * 50)
+                db.presidentes.update_one(
+                    {'date': ultimo_presidente['date']},
+                    {'$set': {'date': today_str}, '$inc': {'id': 1}}
+                )
+
+                proximo_id = ultimo_id + 1
                 proximo_presidente = presidentes.get(str(proximo_id))
                 if proximo_presidente:
-                    date = proxima_data.strftime('%Y-%m-%d')
-                    add_presidentes_db(proximo_id, date)
-
+                    add_presidentes_db(proximo_id, today_str)
                     enviar_info_pelo_canal(proximo_presidente)
                 else:
                     logger.info('-' * 50)
@@ -52,15 +60,12 @@ def enviar_foto_presidente():
                     logger.info('-' * 50)
             else:
                 logger.info('-' * 50)
-                logger.info(
-                    'Ainda não é hora de enviar as informações do próximo presidente.'
-                )
+                logger.info('Já existe um presidente registrado para hoje.')
                 logger.info('-' * 50)
     except Exception as e:
         logger.info('-' * 50)
         logger.error(
-            f'Ocorreu um erro ao enviar informações do presidente: {str(e)}'
-        )
+            f'Ocorreu um erro ao enviar informações do presidente: {str(e)}')
         logger.info('-' * 50)
 
 

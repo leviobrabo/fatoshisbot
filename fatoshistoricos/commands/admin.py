@@ -32,7 +32,7 @@ def cmd_fwdoff(message):
             if existing_chat.get('forwarding') == 'false':
                 bot.reply_to(
                     message,
-                    f'As notificações do {chat_name} já estão desativadas.',
+                    f'O encaminhamento do <b>{chat_name}</b> já estão desativadas.',
                 )
                 return
 
@@ -44,7 +44,7 @@ def cmd_fwdoff(message):
         markup.add(report_bugs)
         bot.reply_to(
             message,
-            '<b>O encaminhamento foi DESATIVADA com sucesso</b>.\n\nA partir de agora...\n\nO chat só receberá as mensagem de fatos históricos do dia.',
+            f'<b>⚠️ O encaminhamento do <b>{chat_name}</b> foi DESATIVADA com sucesso</b>.\n\nAgora o chat não receberá:\n\n• Imagens históricas\nEncaminhamentos do canal oficial\nQuiz de história',
             reply_markup=markup,
         )
         bot.send_message(
@@ -96,7 +96,7 @@ def cmd_fwdon(message):
         markup.add(report_bugs)
         bot.reply_to(
             message,
-            '<b>O encaminhamento foi ATIVADA com sucesso.</b>\n\nA partir de agora...\n\nO chat receberá as mensagem de fatos históricos do dia e encaminhamentos históricos.',
+            f'<b>O encaminhamento do {chat_name} foi ATIVADA com sucesso.</b>\n\nAgora o chat receberá:\n\n• Imagens históricas\nEncaminhamentos do canal oficial\nQuiz de história',
             reply_markup=markup,
         )
         bot.send_message(
@@ -125,7 +125,7 @@ def cmd_settopic(message):
         else:
             bot.reply_to(
                 message,
-                'Este comando deve ser uma resposta a uma mensagem com um thread_id.',
+                'Este comando deve ser uma resposta a uma mensagem com um tópico.',
             )
             return
 
@@ -141,7 +141,7 @@ def cmd_settopic(message):
 
             bot.reply_to(
                 message,
-                f'O Tópico foi atualizado com sucesso!\n\nThread_id= {thread_id}\n\nAgora você receberá os fatos históricos aqui',
+                f'O Tópico foi atualizado com sucesso!\n\nThread_id= <code>{thread_id}</code>\n\nAgora você receberá os fatos históricos aqui',
             )
 
     except Exception as e:

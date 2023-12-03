@@ -178,7 +178,7 @@ schedule.every().day.at('21:30').do(hist_channel_frase)
 
 # Enivo dos presidentes no canal
 
-schedule.every().day.at('20:00').do(enviar_foto_presidente)
+schedule.every().day.at('13:45').do(enviar_foto_presidente)
 
 
 @bot.callback_query_handler(func=lambda call: True)
