@@ -408,6 +408,7 @@ def polling_thread():
     logger.success('Start polling...')
     logger.info('-' * 50)
     bot.polling(allowed_updates=util.update_types)
+    update_user_hits_db()
 
 
 def schedule_thread():
@@ -422,7 +423,6 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
-    update_user_hits_db()
     set_my_configs()
     polling_thread.start()
     schedule_thread.start()
