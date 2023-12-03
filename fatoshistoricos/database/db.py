@@ -202,6 +202,12 @@ def add_presidentes_db(id, date):
         }
     )
 
+def rem_presidentes_db(date):
+    return db.presidentes.delete_one(
+        {
+            'date': date,
+        }
+    )
 
 def search_id_presidente(id):
     return db.presidentes.find_one({'id': id})
