@@ -379,7 +379,7 @@ def polling_thread():
     logger.success('Start polling...')
     logger.info('-' * 50)
     bot.polling(allowed_updates=util.update_types)
-
+    set_my_configs()
 
 def schedule_thread():
     while True:
@@ -393,7 +393,6 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
-    set_my_configs()
     polling_thread.start()
     schedule_thread.start()
 except Exception as e:
