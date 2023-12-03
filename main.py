@@ -112,7 +112,6 @@ def set_my_configs():
     except Exception as ex:
         logger.error(ex)
 
-set_my_configs()
 
 
 # Envio das poll channel
