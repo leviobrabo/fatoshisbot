@@ -199,6 +199,7 @@ def update_user_hits_db():
         if 'questions' not in user:
             user['questions'] = 0
 
+        update_user_in_db(user)
     logger.success('Todos os usuários foram atualizados com hits e questions.')
     return all_users
 
@@ -408,8 +409,7 @@ def polling_thread():
     logger.success('Start polling...')
     logger.info('-' * 50)
     bot.polling(allowed_updates=util.update_types)
-    updated_users = update_user_hits_db()
-    print(updated_users) 
+
 
 def schedule_thread():
     while True:
@@ -423,6 +423,7 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
+    update_user_hits_db()
     set_my_configs()
     polling_thread.start()
     schedule_thread.start()

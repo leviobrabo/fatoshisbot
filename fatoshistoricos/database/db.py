@@ -60,6 +60,12 @@ def search_user(user_id):
     return db.users.find_one({'user_id': user_id})
 
 
+def update_user_in_db(user_id):
+    return db.users.update_one(
+        {'user_id': user_id}, {"$set": {"hits": 0, "questions": 0}}
+    )
+
+
 def search_hits(hits):
     return db.users.find_one({'hits': hits})
 
