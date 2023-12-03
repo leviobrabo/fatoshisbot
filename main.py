@@ -67,8 +67,10 @@ def set_my_configs():
             types.BotCommand('/start', 'Iniciar'),
             types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
             types.BotCommand('/help', 'Ajuda'),
-            types.BotCommand('/sendon', 'Receberá às 8 horas a mensagem diária'),
-            types.BotCommand('/sendoff', 'Não receberá às 8 horas a mensagem diária'),
+            types.BotCommand(
+                '/sendon', 'Receberá às 8 horas a mensagem diária'),
+            types.BotCommand(
+                '/sendoff', 'Não receberá às 8 horas a mensagem diária'),
         ], scope=types.BotCommandScopeAllPrivateChats())
     except Exception as ex:
         logger.error(ex)
@@ -83,7 +85,8 @@ def set_my_configs():
                 types.BotCommand('/ban', 'Banir usuário do bot'),
                 types.BotCommand('/sudolist', 'Lista de usuários sudo'),
                 types.BotCommand('/banneds', 'Lista de usuários banidos'),
-                types.BotCommand('/bcusers', 'Enviar msg broadcast para usuários'),
+                types.BotCommand(
+                    '/bcusers', 'Enviar msg broadcast para usuários'),
                 types.BotCommand('/bcgps', 'Enviar msg broadcast para grupos'),
             ], scope=types.BotCommandScopeChat(chat_id=sudo))
         except Exception as ex:
@@ -98,8 +101,10 @@ def set_my_configs():
 
     try:
         bot.set_my_commands([
-            types.BotCommand('/settopic', 'definir um chat como tópico para receber as mensagens diárias'),
-            types.BotCommand('/unsettopic', 'remove um chat como tópico para receber as mensagens diárias (retorna para o General)'),
+            types.BotCommand(
+                '/settopic', 'definir um chat como tópico para receber as mensagens diárias'),
+            types.BotCommand(
+                '/unsettopic', 'remove um chat como tópico para receber as mensagens diárias (retorna para o General)'),
             types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
             types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
             types.BotCommand('/fwdoff', 'desativa o encaminhamento no grupo'),
@@ -107,10 +112,10 @@ def set_my_configs():
     except Exception as ex:
         logger.error(ex)
 
+set_my_configs()
 
 
 # Envio das poll channel
-
 
 schedule.every().day.at('09:30').do(send_question)
 schedule.every().day.at('11:30').do(send_question)
@@ -379,7 +384,7 @@ def polling_thread():
     logger.success('Start polling...')
     logger.info('-' * 50)
     bot.polling(allowed_updates=util.update_types)
-    set_my_configs()
+
 
 def schedule_thread():
     while True:

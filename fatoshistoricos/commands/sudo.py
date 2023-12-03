@@ -213,7 +213,7 @@ def cmd_stats(message):
 # broadcast
 
 
-@bot.message_handler(commands=['broadcast'])
+@bot.message_handler(commands=['bcusers'])
 def cmd_broadcast_pv(message):
     try:
         user_id = message.from_user.id
@@ -314,7 +314,7 @@ def cmd_broadcast_pv(message):
 # sendgp
 
 
-@bot.message_handler(commands=['bc'])
+@bot.message_handler(commands=['bcgps'])
 def cmd_broadcast_chat(message):
     try:
         user_id = message.from_user.id
