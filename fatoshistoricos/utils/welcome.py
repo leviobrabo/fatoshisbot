@@ -124,36 +124,16 @@ def handle_text_messages(message):
             chat_id = message.chat.id
             chat_name = message.chat.title
             if chat_id == CHANNEL:
-                logger.info('-' * 50)
-                logger.warning(
-                    f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
-                )
-                logger.info('-' * 50)
                 return
 
             if chat_id == CHANNEL_POST:
-                logger.info('-' * 50)
-                logger.warning(
-                    f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
-                )
-                logger.info('-' * 50)
                 return
 
             if chat_id == GROUP_LOG:
-                logger.info('-' * 50)
-                logger.warning(
-                    f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
-                )
-                logger.info('-' * 50)
                 return
 
             existing_chat = search_group(chat_id)
             if existing_chat:
-                logger.info('-' * 50)
-                logger.warning(
-                    f'O bate-papo com ID {chat_id} já existe no banco de dados.'
-                )
-                logger.info('-' * 50)
                 return
 
             add_chat_db(chat_id, chat_name)
