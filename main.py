@@ -326,12 +326,17 @@ def callback_handler(call):
 
             user_info = search_user(user_id)
             if user_info:
+                if 'hits' not in user_info:
+                    user_info['hits'] = 0
+                if 'questions' not in user_info:
+                    user_info['questions'] = 0
                 msg_text = f'<b>Sua conta</b>\n\n'
                 msg_text += f'<b>Nome:</b> {user_info["first_name"]}\n'
                 if user_info.get('username'):
                     msg_text += f'<b>Username:</b> @{user_info["username"]}\n'
                 msg_text += f'<b>Sudo:</b> {"Sim" if user_info["sudo"] == "true" else "Não"}\n'
                 msg_text += f'<b>Recebe mensagem no chat privado:</b>  {"Sim" if user_info["msg_private"] == "true" else "Não"}\n'
+
                 msg_text += (
                     f'<b>Acertos:</b> <code>{user_info["hits"]}</code>\n'
                 )
