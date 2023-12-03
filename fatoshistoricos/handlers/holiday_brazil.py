@@ -32,8 +32,9 @@ def get_holiday_br_of_the_day(CHANNEL):
                     birth_message = f'<i>{bullet}</i> {name}'
                     message_parts.append(birth_message)
 
-                message = f'<b>🎊 | Data comemorativa do dia 🇧🇷</b> \n\n<b><i>{day} de {get_month_name(month)}</i></b>\n\n💬 Você sabia? Siga o @hoje_na_historia.'
+                message = f'<b>🎊 | Data comemorativa do dia 🇧🇷</b> \n\n<b><i>{day} de {get_month_name(month)}</i></b>\n\n'
                 message += '\n'.join(message_parts)
+                message += '\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
             else:
                 logger.info('-' * 50)
