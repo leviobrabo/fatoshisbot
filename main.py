@@ -202,6 +202,7 @@ def update_user_hits_db():
     logger.success('Todos os usuários foram atualizados com hits e questions.')
     return all_users
 
+update_user_hits_db()
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
