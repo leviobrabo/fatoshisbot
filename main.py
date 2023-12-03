@@ -90,7 +90,7 @@ def set_my_configs():
             types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
             types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
             types.BotCommand('/fwdoff', 'desativa o encaminhamento no grupo'),
-        ], scope=types.BotCommandScopeChatAdministrators())
+        ], scope=types.BotCommandScopeAllChatAdministrators())
     except Exception as ex:
         logger.error(ex)
 
