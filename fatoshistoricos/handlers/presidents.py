@@ -42,7 +42,8 @@ def enviar_foto_presidente():
                 # Atualiza o registro existente para a data atual e aumenta o ID em 1
                 logger.info('-' * 50)
                 logger.info(
-                    'Atualizando informações do último presidente para a data atual.')
+                    'Atualizando informações do último presidente para a data atual.'
+                )
                 logger.info('-' * 50)
 
                 proximo_id = ultimo_id + 1
@@ -50,7 +51,7 @@ def enviar_foto_presidente():
                 if proximo_presidente:
                     db.presidentes.update_one(
                         {'date': ultimo_presidente['date']},
-                        {'$set': {'date': today_str}, '$inc': {'id': 1}}
+                        {'$set': {'date': today_str}, '$inc': {'id': 1}},
                     )
                     enviar_info_pelo_canal(proximo_presidente)
                 else:
@@ -64,7 +65,8 @@ def enviar_foto_presidente():
     except Exception as e:
         logger.info('-' * 50)
         logger.error(
-            f'Ocorreu um erro ao enviar informações do presidente: {str(e)}')
+            f'Ocorreu um erro ao enviar informações do presidente: {str(e)}'
+        )
         logger.info('-' * 50)
 
 
