@@ -8,6 +8,8 @@ from fatoshistoricos.database.db import *
 from fatoshistoricos.loggers import logger
 
 bot.message_handler(commands=['add_sudo'])
+
+
 def cmd_add_sudo(message):
     try:
         if message.chat.type == 'private':
@@ -63,7 +65,7 @@ def cmd_add_sudo(message):
 
 # rem_sudo
 @bot.message_handler(commands=['rem_sudo'])
-def unsudo_command(message):
+def cmd_rem_sudo(message):
     try:
         if message.chat.type == 'private':
             if message.from_user.id == OWNER:
@@ -212,7 +214,7 @@ def cmd_stats(message):
 
 
 @bot.message_handler(commands=['broadcast'])
-def handle_broadcast_pv(message):
+def cmd_broadcast_pv(message):
     try:
         user_id = message.from_user.id
         if message.from_user.id != OWNER:
@@ -313,7 +315,7 @@ def handle_broadcast_pv(message):
 
 
 @bot.message_handler(commands=['bc'])
-def handle_broadcast_chat(message):
+def cmd_broadcast_chat(message):
     try:
         user_id = message.from_user.id
         if message.from_user.id != OWNER:
@@ -414,7 +416,7 @@ def handle_broadcast_chat(message):
 
 
 @bot.message_handler(commands=['devs'])
-def list_devs(message):
+def cmd_list_devs(message):
     if message.chat.type != 'private':
         return
     user_id = message.from_user.id
@@ -442,7 +444,7 @@ def list_devs(message):
 
 
 @bot.message_handler(commands=['dev'])
-def commands_sudo(message):
+def cmd_sudo(message):
     try:
         if message.chat.type != 'private':
             return

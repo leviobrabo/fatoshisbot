@@ -22,7 +22,7 @@ def get_curiosity(CHANNEL):
             if curiosidade:
                 info = curiosidade.get('texto', '')
 
-                message = f'<b>Curiosidades Históricas 📜</b>\n\n{info}\n\n💬 Você sabia? Siga o @hoje_na_historia.'
+                message = f'<b>Curiosidades Históricas 📜</b>\n\n<code>{info}</code>\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
             else:
                 logger.info('-' * 50)

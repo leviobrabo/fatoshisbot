@@ -5,17 +5,17 @@ import schedule
 from telebot import util
 
 from fatoshistoricos.bot.bot import bot
-from fatoshistoricos.commands.admin import (commands_fwdoff, commands_fwdon,
-                                            commands_settopic,
-                                            commands_unsettopic)
+from fatoshistoricos.commands.admin import (cmd_fwdoff, cmd_fwdon,
+                                            cmd_settopic,
+                                            cmd_unsettopic)
 from fatoshistoricos.commands.fotoshist import cmd_photo_hist
 from fatoshistoricos.commands.help import cmd_help
-from fatoshistoricos.commands.send import commands_sendoff, commands_sendon
+from fatoshistoricos.commands.send import cmd_sendoff, cmd_sendon
 from fatoshistoricos.commands.start import cmd_start
-from fatoshistoricos.commands.sudo import (cmd_add_sudo, commands_sudo, cmd_group,
-                                           handle_broadcast_chat,
-                                           handle_broadcast_pv, list_devs,
-                                           cmd_stats, unsudo_command)
+from fatoshistoricos.commands.sudo import (cmd_add_sudo, cmd_sudo, cmd_group,
+                                           cmd_broadcast_chat,
+                                           cmd_broadcast_pv, cmd_list_devs,
+                                           cmd_stats, cmd_rem_sudo)
 from fatoshistoricos.config import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
@@ -39,19 +39,19 @@ bot.add_message_handler(cmd_start)
 bot.add_message_handler(cmd_help)
 bot.add_message_handler(cmd_photo_hist)
 bot.add_message_handler(cmd_add_sudo)
-bot.add_message_handler(unsudo_command)
+bot.add_message_handler(cmd_rem_sudo)
 bot.add_message_handler(cmd_group)
 bot.add_message_handler(cmd_stats)
-bot.add_message_handler(handle_broadcast_pv)
-bot.add_message_handler(handle_broadcast_chat)
-bot.add_message_handler(list_devs)
-bot.add_message_handler(commands_sudo)
-bot.add_message_handler(commands_sendon)
-bot.add_message_handler(commands_sendoff)
-bot.add_message_handler(commands_fwdon)
-bot.add_message_handler(commands_fwdoff)
-bot.add_message_handler(commands_settopic)
-bot.add_message_handler(commands_unsettopic)
+bot.add_message_handler(cmd_broadcast_pv)
+bot.add_message_handler(cmd_broadcast_chat)
+bot.add_message_handler(cmd_list_devs)
+bot.add_message_handler(cmd_sudo)
+bot.add_message_handler(cmd_sendon)
+bot.add_message_handler(cmd_sendoff)
+bot.add_message_handler(cmd_fwdon)
+bot.add_message_handler(cmd_fwdoff)
+bot.add_message_handler(cmd_settopic)
+bot.add_message_handler(cmd_unsettopic)
 
 
 def sudos(user_id):
