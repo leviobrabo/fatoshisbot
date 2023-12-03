@@ -7,7 +7,7 @@ try:
     logger.info('-' * 50)
     logger.info('ℹ️ INICIANDO CONEXÃO COM O MONGODB')
     logger.info('-' * 50)
-    client = MongoClient(MONGO_CON)
+    client = MongoClient(MONGO_CON, retryWrites=True)
     db = client.fatoshistbot
     logger.success('✅ Conexão com o MongoDB estabelecida com sucesso!')
     logger.info('-' * 50)
