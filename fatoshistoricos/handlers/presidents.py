@@ -52,7 +52,6 @@ def enviar_foto_presidente():
                 proximo_id = ultimo_id + 1
                 proximo_presidente = presidentes.get(str(proximo_id))
                 if proximo_presidente:
-                    add_presidentes_db(proximo_id, today_str)
                     enviar_info_pelo_canal(proximo_presidente)
                 else:
                     logger.info('-' * 50)
