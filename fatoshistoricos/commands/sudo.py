@@ -8,9 +8,7 @@ from fatoshistoricos.database.db import *
 from fatoshistoricos.loggers import logger
 
 bot.message_handler(commands=['add_sudo'])
-
-
-def add_sudo(message):
+def cmd_add_sudo(message):
     try:
         if message.chat.type == 'private':
             if message.from_user.id == OWNER:
@@ -121,7 +119,7 @@ def unsudo_command(message):
 
 
 @bot.message_handler(commands=['grupos'])
-def grupos(message):
+def cmd_group(message):
     if message.from_user.id != OWNER:
         if message.chat.type != 'private':
             return
@@ -198,7 +196,7 @@ def grupos(message):
 
 
 @bot.message_handler(commands=['stats'])
-def stats(message):
+def cmd_stats(message):
     try:
         count_users = sum(1 for _ in get_all_users())
         count_groups = sum(1 for _ in get_all_chats())
@@ -228,7 +226,6 @@ def handle_broadcast_pv(message):
         )
 
         if message.reply_to_message:
-            # Se for uma resposta a uma mensagem
             reply_msg = message.reply_to_message
             ulist = get_all_users()
             success_br = 0
@@ -262,7 +259,6 @@ def handle_broadcast_pv(message):
                 f'╰❑',
             )
         else:
-            # Se for enviado diretamente na conversa
             if len(command_parts) < 2:
                 bot.send_message(
                     message.chat.id,
@@ -331,7 +327,6 @@ def handle_broadcast_chat(message):
         )
 
         if message.reply_to_message:
-            # Se for uma resposta a uma mensagem
             reply_msg = message.reply_to_message
             ulist = get_all_chats()
             success_br = 0
@@ -365,7 +360,6 @@ def handle_broadcast_chat(message):
                 f'╰❑',
             )
         else:
-            # Se for enviado diretamente na conversa
             if len(command_parts) < 2:
                 bot.send_message(
                     message.chat.id,

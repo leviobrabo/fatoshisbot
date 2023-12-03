@@ -8,14 +8,14 @@ from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.commands.admin import (commands_fwdoff, commands_fwdon,
                                             commands_settopic,
                                             commands_unsettopic)
-from fatoshistoricos.commands.fotoshist import fotos_hist
+from fatoshistoricos.commands.fotoshist import cmd_photo_hist
 from fatoshistoricos.commands.help import cmd_help
-from fatoshistoricos.commands.send import commands_sendff, commands_sendon
+from fatoshistoricos.commands.send import commands_sendoff, commands_sendon
 from fatoshistoricos.commands.start import cmd_start
-from fatoshistoricos.commands.sudo import (add_sudo, commands_sudo, grupos,
+from fatoshistoricos.commands.sudo import (cmd_add_sudo, commands_sudo, cmd_group,
                                            handle_broadcast_chat,
                                            handle_broadcast_pv, list_devs,
-                                           stats, unsudo_command)
+                                           cmd_stats, unsudo_command)
 from fatoshistoricos.config import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
@@ -37,17 +37,17 @@ from fatoshistoricos.utils.welcome import *
 
 bot.add_message_handler(cmd_start)
 bot.add_message_handler(cmd_help)
-bot.add_message_handler(fotos_hist)
-bot.add_message_handler(add_sudo)
+bot.add_message_handler(cmd_photo_hist)
+bot.add_message_handler(cmd_add_sudo)
 bot.add_message_handler(unsudo_command)
-bot.add_message_handler(grupos)
-bot.add_message_handler(stats)
+bot.add_message_handler(cmd_group)
+bot.add_message_handler(cmd_stats)
 bot.add_message_handler(handle_broadcast_pv)
 bot.add_message_handler(handle_broadcast_chat)
 bot.add_message_handler(list_devs)
 bot.add_message_handler(commands_sudo)
 bot.add_message_handler(commands_sendon)
-bot.add_message_handler(commands_sendff)
+bot.add_message_handler(commands_sendoff)
 bot.add_message_handler(commands_fwdon)
 bot.add_message_handler(commands_fwdoff)
 bot.add_message_handler(commands_settopic)
@@ -195,15 +195,15 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-# schedule.every().day.at('10:00').do(hist_channel_curiosity)
+schedule.every().day.at('10:00').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
-# schedule.every().day.at('21:30').do(hist_channel_frase)
+schedule.every().day.at('21:30').do(hist_channel_frase)
 
 # Enivo dos presidentes no canal
 
-# schedule.every().day.at('20:00').do(enviar_foto_presidente)
+schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
 
 @bot.callback_query_handler(func=lambda call: True)

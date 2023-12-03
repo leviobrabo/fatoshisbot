@@ -37,7 +37,7 @@ def commands_sendon(message):
 
 
 @bot.message_handler(commands=['sendoff'])
-def commands_sendff(message):
+def commands_sendoff(message):
     try:
         if message.chat.type != 'private':
             return
