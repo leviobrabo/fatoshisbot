@@ -423,7 +423,6 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
-    update_user_hits_db()
     set_my_configs()
     polling_thread.start()
     schedule_thread.start()
