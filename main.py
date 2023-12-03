@@ -408,8 +408,8 @@ def polling_thread():
     logger.success('Start polling...')
     logger.info('-' * 50)
     bot.polling(allowed_updates=util.update_types)
-    update_user_hits_db()
-
+    updated_users = update_user_hits_db()
+    print(updated_users) 
 
 def schedule_thread():
     while True:
