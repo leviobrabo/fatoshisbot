@@ -62,52 +62,35 @@ def sudos(user_id):
 
 def set_my_configs():
     try:
-        bot.set_my_commands(
-            [
-                types.BotCommand('/start', 'Iniciar'),
-                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-                types.BotCommand('/help', 'Ajuda'),
-                types.BotCommand(
-                    '/sendon', 'Receberá às 8 horas a mensagem diária'
-                ),
-                types.BotCommand(
-                    '/sendoff', 'Não receberá às 8 horas a mensagem diária'
-                ),
-            ],
-            scope=types.BotCommandScopeAllPrivateChats(),
-        )
+        bot.set_my_commands([
+            types.BotCommand('/start', 'Iniciar'),
+            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+            types.BotCommand('/help', 'Ajuda'),
+            types.BotCommand(
+                '/sendon', 'Receberá às 8 horas a mensagem diária'),
+            types.BotCommand(
+                '/sendoff', 'Não receberá às 8 horas a mensagem diária'),
+        ], scope=types.BotCommandScopeAllPrivateChats())
     except Exception as ex:
         logger.error(ex)
 
     try:
-        bot.set_my_commands(
-            [
-                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-            ],
-            scope=types.BotCommandScopeAllGroupChats(),
-        )
+        bot.set_my_commands([
+            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+        ], scope=types.BotCommandScopeAllGroupChats())
     except Exception as ex:
         logger.error(ex)
 
     try:
-        bot.set_my_commands(
-            [
-                types.BotCommand(
-                    '/settopic',
-                    'definir um chat como tópico para receber as mensagens diárias',
-                ),
-                types.BotCommand(
-                    '/unsettopic',
-                    'remove um chat como tópico para receber as mensagens diárias (retorna para o General)',
-                ),
-                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-                types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
-                types.BotCommand(
-                    '/fwdoff', 'desativa o encaminhamento no grupo'
-                ),
-            ],
-            scope=types.BotCommandScopeChatAdministrators(),
-        )
+        bot.set_my_commands([
+            types.BotCommand(
+                '/settopic', 'definir um chat como tópico para receber as mensagens diárias'),
+            types.BotCommand(
+                '/unsettopic', 'remove um chat como tópico para receber as mensagens diárias (retorna para o General)'),
+            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+            types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
+            types.BotCommand('/fwdoff', 'desativa o encaminhamento no grupo'),
+        ], scope=types.BotCommandScopeChatAdministrators())
     except Exception as ex:
         logger.error(ex)
 
@@ -115,25 +98,20 @@ def set_my_configs():
     for user in all_users:
         if sudos(user):
             user_id = user.get('user_id')
-        try:
-            bot.set_my_commands(
-                [
+            try:
+                bot.set_my_commands([
                     types.BotCommand('/sys', 'Uso do servidor'),
                     types.BotCommand('/sudo', 'Elevar usuário'),
                     types.BotCommand('/ban', 'Banir usuário do bot'),
                     types.BotCommand('/sudolist', 'Lista de usuários sudo'),
                     types.BotCommand('/banneds', 'Lista de usuários banidos'),
                     types.BotCommand(
-                        '/bcusers', 'Enviar msg broadcast para usuários'
-                    ),
+                        '/bcusers', 'Enviar msg broadcast para usuários'),
                     types.BotCommand(
-                        '/bcgps', 'Enviar msg broadcast para grupos'
-                    ),
-                ],
-                scope=types.BotCommandScopeChat(chat_id=user_id),
-            )
-        except Exception as ex:
-            logger.error(ex)
+                        '/bcgps', 'Enviar msg broadcast para grupos'),
+                ], scope=types.BotCommandScopeChat(chat_id=user_id))
+            except Exception as ex:
+                logger.error(ex)
 
 
 # Envio das poll channel
