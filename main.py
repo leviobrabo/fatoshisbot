@@ -6,16 +6,15 @@ from telebot import util
 
 from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.commands.admin import (cmd_fwdoff, cmd_fwdon,
-                                            cmd_settopic,
-                                            cmd_unsettopic)
+                                            cmd_settopic, cmd_unsettopic)
 from fatoshistoricos.commands.fotoshist import cmd_photo_hist
 from fatoshistoricos.commands.help import cmd_help
 from fatoshistoricos.commands.send import cmd_sendoff, cmd_sendon
 from fatoshistoricos.commands.start import cmd_start
-from fatoshistoricos.commands.sudo import (cmd_add_sudo, cmd_sudo, cmd_group,
-                                           cmd_broadcast_chat,
-                                           cmd_broadcast_pv, cmd_list_devs,
-                                           cmd_stats, cmd_rem_sudo)
+from fatoshistoricos.commands.sudo import (cmd_add_sudo, cmd_broadcast_chat,
+                                           cmd_broadcast_pv, cmd_group,
+                                           cmd_list_devs, cmd_rem_sudo,
+                                           cmd_stats, cmd_sudo)
 from fatoshistoricos.config import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
@@ -63,59 +62,81 @@ def sudos(user_id):
 
 def set_my_configs():
     try:
-        bot.set_my_commands([
-            types.BotCommand('/start', 'Iniciar'),
-            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-            types.BotCommand('/help', 'Ajuda'),
-            types.BotCommand(
-                '/sendon', 'Receberá às 8 horas a mensagem diária'),
-            types.BotCommand(
-                '/sendoff', 'Não receberá às 8 horas a mensagem diária'),
-        ], scope=types.BotCommandScopeAllPrivateChats())
+        bot.set_my_commands(
+            [
+                types.BotCommand('/start', 'Iniciar'),
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+                types.BotCommand('/help', 'Ajuda'),
+                types.BotCommand(
+                    '/sendon', 'Receberá às 8 horas a mensagem diária'
+                ),
+                types.BotCommand(
+                    '/sendoff', 'Não receberá às 8 horas a mensagem diária'
+                ),
+            ],
+            scope=types.BotCommandScopeAllPrivateChats(),
+        )
     except Exception as ex:
         logger.error(ex)
 
-    sudo_list = sudos()
+    try:
+        bot.set_my_commands(
+            [
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+            ],
+            scope=types.BotCommandScopeAllGroupChats(),
+        )
+    except Exception as ex:
+        logger.error(ex)
 
-    for sudo in sudo_list:
-        try:
-            bot.set_my_commands([
-                types.BotCommand('/sys', 'Uso do servidor'),
-                types.BotCommand('/sudo', 'Elevar usuário'),
-                types.BotCommand('/ban', 'Banir usuário do bot'),
-                types.BotCommand('/sudolist', 'Lista de usuários sudo'),
-                types.BotCommand('/banneds', 'Lista de usuários banidos'),
+    try:
+        bot.set_my_commands(
+            [
                 types.BotCommand(
-                    '/bcusers', 'Enviar msg broadcast para usuários'),
-                types.BotCommand('/bcgps', 'Enviar msg broadcast para grupos'),
-            ], scope=types.BotCommandScopeChat(chat_id=sudo))
+                    '/settopic',
+                    'definir um chat como tópico para receber as mensagens diárias',
+                ),
+                types.BotCommand(
+                    '/unsettopic',
+                    'remove um chat como tópico para receber as mensagens diárias (retorna para o General)',
+                ),
+                types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
+                types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
+                types.BotCommand(
+                    '/fwdoff', 'desativa o encaminhamento no grupo'
+                ),
+            ],
+            scope=types.BotCommandScopeChatAdministrators(),
+        )
+    except Exception as ex:
+        logger.error(ex)
+
+    all_users = get_all_users()
+    for user in all_users:
+        if sudos(user):
+            user_id = user.get('user_id')
+        try:
+            bot.set_my_commands(
+                [
+                    types.BotCommand('/sys', 'Uso do servidor'),
+                    types.BotCommand('/sudo', 'Elevar usuário'),
+                    types.BotCommand('/ban', 'Banir usuário do bot'),
+                    types.BotCommand('/sudolist', 'Lista de usuários sudo'),
+                    types.BotCommand('/banneds', 'Lista de usuários banidos'),
+                    types.BotCommand(
+                        '/bcusers', 'Enviar msg broadcast para usuários'
+                    ),
+                    types.BotCommand(
+                        '/bcgps', 'Enviar msg broadcast para grupos'
+                    ),
+                ],
+                scope=types.BotCommandScopeChat(chat_id=user_id),
+            )
         except Exception as ex:
             logger.error(ex)
 
-    try:
-        bot.set_my_commands([
-            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-        ], scope=types.BotCommandScopeAllGroupChats())
-    except Exception as ex:
-        logger.error(ex)
-
-    try:
-        bot.set_my_commands([
-            types.BotCommand(
-                '/settopic', 'definir um chat como tópico para receber as mensagens diárias'),
-            types.BotCommand(
-                '/unsettopic', 'remove um chat como tópico para receber as mensagens diárias (retorna para o General)'),
-            types.BotCommand('/fotoshist', 'Fotos de fatos históricos 🙂'),
-            types.BotCommand('/fwdon', 'ativa o encaminhamento no grupo'),
-            types.BotCommand('/fwdoff', 'desativa o encaminhamento no grupo'),
-        ], scope=types.BotCommandScopeChatAdministrators())
-    except Exception as ex:
-        logger.error(ex)
-
-
 
 # Envio das poll channel
-
 schedule.every().day.at('09:30').do(send_question)
 schedule.every().day.at('11:30').do(send_question)
 schedule.every().day.at('14:10').do(send_question)
@@ -397,6 +418,7 @@ schedule_thread = threading.Thread(target=schedule_thread)
 
 
 try:
+    set_my_configs()
     polling_thread.start()
     schedule_thread.start()
 except Exception as e:
