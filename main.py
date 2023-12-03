@@ -191,19 +191,6 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 # schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
 
-def update_user_hits_db():
-    all_users = get_all_users
-    for user in all_users:
-        if 'hits' not in user:
-            user['hits'] = 0
-        if 'questions' not in user:
-            user['questions'] = 0
-
-        update_user_in_db(user)
-    logger.success('Todos os usuários foram atualizados com hits e questions.')
-    return all_users
-
-
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
     try:
@@ -415,13 +402,9 @@ def schedule_thread():
     while True:
         schedule.run_pending()
         sleep(1)
-        
-        update_user_hits_db()
-
 
 polling_thread = threading.Thread(target=polling_thread)
 schedule_thread = threading.Thread(target=schedule_thread)
-
 
 try:
     set_my_configs()
