@@ -414,8 +414,9 @@ def polling_thread():
 def schedule_thread():
     while True:
         schedule.run_pending()
-
         sleep(1)
+        
+        update_user_hits_db()
 
 
 polling_thread = threading.Thread(target=polling_thread)
