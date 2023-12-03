@@ -18,13 +18,13 @@ def cmd_sendon(message):
             if user.get('msg_private') == 'true':
                 bot.reply_to(
                     message,
-                    'Você já ATIVOU a função de receber mensagens no chat privado.',
+                    'Você já ATIVOU a função de receber eventos históricos no chat privado.',
                 )
             else:
                 update_msg_private(user_id, 'true')
                 bot.reply_to(
                     message,
-                    '<b>Mensagens privadas ATIVADAS</b>. Você receberá fatos históricos todos os dias às 8 horas.',
+                    '<b>Eventos históricos no chat privado ATIVADO</b>. Você receberá fatos históricos todos os dias às 8 horas.',
                 )
         else:
             add_user_db(message)
@@ -48,13 +48,13 @@ def cmd_sendoff(message):
             if user.get('msg_private') == 'false':
                 bot.reply_to(
                     message,
-                    'Você já DESATIVOU a função de receber mensagens no chat privado.',
+                    'Você já DESATIVOU a função de receber eventos históricos no chat privado.',
                 )
             else:
                 update_msg_private(user_id, 'false')
                 bot.reply_to(
                     message,
-                    '<b>Mensagens privadas DESATIVADAS</b>. Você receberá fatos históricos todos os dias às 8 horas.',
+                    '<b>Eventos históricos no chat privado DESATIVADO</b>. Você receberá fatos históricos todos os dias às 8 horas.',
                 )
         else:
             add_user_db(message)
