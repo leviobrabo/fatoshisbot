@@ -3,9 +3,16 @@ from pymongo import ASCENDING, MongoClient
 from fatoshistoricos.config import MONGO_CON
 from fatoshistoricos.loggers import logger
 
-client = MongoClient(MONGO_CON)
-db = client.fatoshistbot
-
+try:
+    logger.info('-' * 50)
+    logger.info('ℹ️ INICIANDO CONEXÃO COM O MONGODB')
+    logger.info('-' * 50)
+    client = MongoClient(MONGO_CON)
+    db = client.fatoshistbot
+    logger.success('✅ Conexão com o MongoDB estabelecida com sucesso!')
+    logger.info('-' * 50)
+except Exception as e:
+    logger.error(f'❗️ Erro ao conectar ao MongoDB: {e}')
 
 # Operações relacionadas a usuários
 
