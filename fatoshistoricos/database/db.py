@@ -3,7 +3,7 @@ from pymongo import ASCENDING, MongoClient
 from fatoshistoricos.config import MONGO_CON
 from fatoshistoricos.loggers import logger
 
-client = MongoClient(MONGO_CON, retryWrites=False)
+client = MongoClient(MONGO_CON, retryWrites=True)
 db = client.fatoshistbot
 
 # Operações relacionadas a usuários
