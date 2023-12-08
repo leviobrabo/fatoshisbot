@@ -54,7 +54,7 @@ def cmd_sendoff(message):
                 update_msg_private(user_id, 'false')
                 bot.reply_to(
                     message,
-                    '<b>Eventos históricos no chat privado DESATIVADO</b>. Você receberá fatos históricos todos os dias às 8 horas.',
+                    '<b>Eventos históricos no chat privado DESATIVADO</b>. Você não receberá fatos históricos todos os dias às 8 horas.',
                 )
         else:
             add_user_db(message)
