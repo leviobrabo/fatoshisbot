@@ -4,13 +4,13 @@ from fatoshistoricos.config import MONGO_CON
 from fatoshistoricos.loggers import logger
 
 try:
-    logger.info('-' * 50)
+
     logger.info('ℹ️ INICIANDO CONEXÃO COM O MONGODB')
-    logger.info('-' * 50)
+
     client = MongoClient(MONGO_CON)
     db = client.fatoshistbot
     logger.success('✅ Conexão com o MongoDB estabelecida com sucesso!')
-    logger.info('-' * 50)
+
 except Exception as e:
     logger.error(f'❗️ Erro ao conectar ao MongoDB: {e}')
 
@@ -62,7 +62,7 @@ def search_user(user_id):
 
 def update_user_in_db(user_id):
     return db.users.update_one(
-        {'user_id': user_id}, {"$set": {"hits": 0, "questions": 0}}
+        {'user_id': user_id}, {'$set': {'hits': 0, 'questions': 0}}
     )
 
 
@@ -120,7 +120,8 @@ def set_hit_user(user_id):
             db.users.update_one({'user_id': user_id}, {'$inc': {'hits': 1}})
         else:
             db.users.insert_one(
-                {'user_id': user_id, 'hits': 1, 'questions': 1})
+                {'user_id': user_id, 'hits': 1, 'questions': 1}
+            )
 
 
 def set_questions_user(user_id):
@@ -130,7 +131,8 @@ def set_questions_user(user_id):
             db.users.update_one({'user_id': user_id}, {'$inc': {'hits': 1}})
         else:
             db.users.insert_one(
-                {'user_id': user_id, 'hits': 1, 'questions': 1})
+                {'user_id': user_id, 'hits': 1, 'questions': 1}
+            )
 
 
 def update_msg_private(user_id, new_status):
@@ -234,13 +236,9 @@ def search_id_presidente(id):
 def search_date_presidente(date):
     return db.presidentes.find_onde({'date': date})
 
+
 # Operações relacionadas a contador de user
 
 
 def count_user_channel(count, date):
-    return db.counter.insert_one(
-        {
-            'count': count,
-            'date': date
-        }
-    )
+    return db.counter.insert_one({'count': count, 'date': date})

@@ -55,19 +55,18 @@ def send_historical_events_group_image(chat_id):
                     parse_mode='HTML',
                     reply_markup=inline_keyboard,
                 )
-            logger.info('-' * 50)
+
             logger.success(
                 f'Evento histórico em foto enviado com sucesso para o chat ID {chat_id}.'
             )
-            logger.info('-' * 50)
+
         else:
-            logger.info('-' * 50)
+
             logger.info('Não há eventos históricos para o dia atual.')
-            logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Falha ao enviar evento histórico: {e}')
-        logger.info('-' * 50)
 
 
 def hist_image_chat_job():
@@ -79,12 +78,11 @@ def hist_image_chat_job():
                 try:
                     send_historical_events_group_image(chat_id)
                 except Exception as e:
-                    logger.info('-' * 50)
+
                     logger.error(
                         f'Error sending imgs historical events to group {chat_id}: {str(e)}'
                     )
-                    logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao fazero envio das imgs para chats:', str(e))
-        logger.info('-' * 50)

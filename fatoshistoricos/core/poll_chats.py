@@ -38,13 +38,12 @@ def send_poll_chat(
         poll_id = sent_poll.poll.id
 
         add_poll_db(chat_id, poll_id, correct_option_id, current_date)
-        logger.info('-' * 50)
+
         logger.success(f'Enviada pergunta para o chat {chat_id}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a pergunta: {e}')
-        logger.info('-' * 50)
 
 
 def send_question_chat():
@@ -115,9 +114,8 @@ def send_question_chat():
                     )
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a pergunta: {e}')
-        logger.info('-' * 50)
 
 
 @bot.poll_answer_handler()
@@ -138,9 +136,8 @@ def handle_poll_answer(poll_answer):
             if poll_db:
                 correto = poll_db.get('correct_option_id')
         except AttributeError as e:
-            logger.info('-' * 50)
+
             logger.warning(f'Erro ao obter a opção correta da enquete: {e}')
-            logger.info('-' * 50)
 
         user = search_user(user_id)
         if not user:
@@ -151,18 +148,16 @@ def handle_poll_answer(poll_answer):
             set_questions_user(user_id)
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao processar a resposta da enquete: {e}')
-        logger.info('-' * 50)
 
 
 def remove_all_poll():
     try:
-        logger.info('-' * 50)
+
         logger.success('Removido as polls do banco de dados!')
-        logger.info('-' * 50)
+
         remove_all_poll_db()
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao processar a resposta da enquete: {e}')
-        logger.info('-' * 50)

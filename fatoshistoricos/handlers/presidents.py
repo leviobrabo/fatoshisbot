@@ -40,11 +40,10 @@ def enviar_foto_presidente():
 
             if ultimo_presidente['date'] != today_str:
                 # Atualiza o registro existente para a data atual e aumenta o ID em 1
-                logger.info('-' * 50)
+
                 logger.info(
                     'Atualizando informações do último presidente para a data atual.'
                 )
-                logger.info('-' * 50)
 
                 proximo_id = ultimo_id + 1
                 proximo_presidente = presidentes.get(str(proximo_id))
@@ -55,19 +54,18 @@ def enviar_foto_presidente():
                     )
                     enviar_info_pelo_canal(proximo_presidente)
                 else:
-                    logger.info('-' * 50)
+
                     logger.error('Não há mais presidentes para enviar.')
-                    logger.info('-' * 50)
+
             else:
-                logger.info('-' * 50)
+
                 logger.info('Já existe um presidente registrado para hoje.')
-                logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(
             f'Ocorreu um erro ao enviar informações do presidente: {str(e)}'
         )
-        logger.info('-' * 50)
 
 
 def enviar_info_pelo_canal(info_presidente):
@@ -90,11 +88,9 @@ def enviar_info_pelo_canal(info_presidente):
             f'💬 Você sabia? Siga o @hoje_na_historia.'
         )
 
-        logger.info('-' * 50)
         logger.success('Envio de presidente concluído com sucesso!')
-        logger.info('-' * 50)
+
         bot.send_photo(CHANNEL, photo=foto, caption=caption, parse_mode='HTML')
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar foto do presidente: {str(e)}')
-        logger.info('-' * 50)

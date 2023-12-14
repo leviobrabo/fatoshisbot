@@ -29,22 +29,20 @@ def get_frase(CHANNEL):
                 message = f'<b>💡 Citação para refletir</b>\n\n"<i>{quote}"</i> - <b>{author}</b>\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
             else:
-                logger.info('-' * 50)
+
                 logger.info('Não há informações para o dia de hoje.')
-                logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao obter informações:', str(e))
-        logger.info('-' * 50)
 
 
 def hist_channel_frase():
     try:
         get_frase(CHANNEL)
-        logger.info('-' * 50)
+
         logger.success(f'Frase enviada o canal {CHANNEL}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar o trabalho curiosidade:', str(e))
-        logger.info('-' * 50)

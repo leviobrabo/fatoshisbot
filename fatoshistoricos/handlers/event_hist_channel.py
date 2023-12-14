@@ -26,25 +26,22 @@ def send_historical_events_channel(CHANNEL):
                 '<b>Não há eventos históricos para hoje.</b>',
                 parse_mode='HTML',
             )
-            logger.info('-' * 50)
+
             logger.info(
                 f'Nenhum evento histórico para hoje no grupo {CHANNEL}'
             )
-            logger.info('-' * 50)
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar fatos históricos para o canal:', str(e))
-        logger.info('-' * 50)
 
 
 def hist_channel_events():
     try:
         send_historical_events_channel(CHANNEL)
-        logger.info('-' * 50)
+
         logger.success(f'Eventos históricos enviada o canal {CHANNEL}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro no trabalho de enviar fatos hist no canal:', str(e))
-        logger.info('-' * 50)

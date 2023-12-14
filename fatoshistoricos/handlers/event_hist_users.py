@@ -39,18 +39,16 @@ def send_historical_events_user(user_id):
                 parse_mode='HTML',
                 reply_markup=markup,
             )
-            logger.info('-' * 50)
+
             logger.warning(
                 f'Nenhum evento histórico para hoje no grupo {user_id}'
             )
-            logger.info('-' * 50)
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(
             'Erro ao enviar fatos históricos para os usuários:', str(e)
         )
-        logger.info('-' * 50)
 
 
 def hist_user_job():
@@ -64,16 +62,15 @@ def hist_user_job():
                 try:
                     bot.delete_message(user_id, message_id)
                 except Exception as e:
-                    logger.info('-' * 50)
+
                     logger.warning(f'Não foi possível deletar {user_id}')
-                    logger.info('-' * 50)
+
                     pass
 
             send_historical_events_user(user_id)
-            logger.info('-' * 50)
+
             logger.success(f'Mensagem enviada ao usuário {user_id}')
-            logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar para os usuários:', str(e))
-        logger.info('-' * 50)

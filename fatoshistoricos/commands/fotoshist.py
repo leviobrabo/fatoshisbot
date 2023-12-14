@@ -110,6 +110,5 @@ def cmd_photo_hist(message):
             reply_to_message_id=message.message_id,
         )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a imagem histórica: {e}')
-        logger.info('-' * 50)

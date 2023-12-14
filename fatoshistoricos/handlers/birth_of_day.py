@@ -47,26 +47,24 @@ def get_births_of_the_day(CHANNEL):
 
                 bot.send_message(CHANNEL, message)
             else:
-                logger.info('-' * 50)
+
                 logger.info('Não há informações sobre nascidos hoje.')
-                logger.info('-' * 50)
+
         else:
-            logger.info('-' * 50)
+
             logger.warning('Erro ao obter informações:', response.status_code)
-            logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao obter informações:', str(e))
-        logger.info('-' * 50)
 
 
 def hist_channel_birth():
     try:
         get_births_of_the_day(CHANNEL)
-        logger.info('-' * 50)
+
         logger.success(f'Nascidos enviada o canal {CHANNEL}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar o trabalho nascido:', str(e))
-        logger.info('-' * 50)

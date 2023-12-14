@@ -35,11 +35,11 @@ def send_historical_events_group(chat_id):
                 reply_markup=markup,
                 message_thread_id=topic,
             )
-            logger.info('-' * 50)
+
             logger.success(
                 f'Eventos históricos enviada com sucesso para o grupo {chat_id}'
             )
-            logger.info('-' * 50)
+
         else:
             bot.send_message(
                 chat_id,
@@ -48,22 +48,20 @@ def send_historical_events_group(chat_id):
                 reply_markup=markup,
                 message_thread_id=topic,
             )
-            logger.info('-' * 50)
+
             logger.warning(
                 f'Nenhum evento histórico para hoje no grupo {chat_id}'
             )
-            logger.info('-' * 50)
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar fatos históricos para os chats:', str(e))
-        logger.info('-' * 50)
+
         remove_chat_db(chat_id)
-        logger.info('-' * 50)
+
         logger.warning(
             f'Chat {chat_id} removido do banco de dados devido a erro ao enviar mensagem de eventos históricos.'
         )
-        logger.info('-' * 50)
 
 
 def hist_chat_job():
@@ -75,12 +73,11 @@ def hist_chat_job():
                 try:
                     send_historical_events_group(chat_id)
                 except Exception as e:
-                    logger.info('-' * 50)
+
                     logger.error(
                         f'Error sending historical events to group {chat_id}: {str(e)}'
                     )
-                    logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao fazer o envio para chats:', str(e))
-        logger.info('-' * 50)

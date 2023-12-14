@@ -21,9 +21,8 @@ def send_new_group_message(chat):
             disable_web_page_preview=True,
         )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao adicionador grupo no banco de dados: {e}')
-        logger.info('-' * 50)
 
 
 @bot.my_chat_member_handler()
@@ -39,44 +38,44 @@ def send_group_greeting(message: types.ChatMemberUpdated):
             chat_name = message.chat.title
 
             if chat_id == CHANNEL:
-                logger.info('-' * 50)
+
                 logger.warning(
                     f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
                 )
-                logger.info('-' * 50)
+
                 return
 
             if chat_id == CHANNEL_POST:
-                logger.info('-' * 50)
+
                 logger.warning(
                     f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
                 )
-                logger.info('-' * 50)
+
                 return
 
             if chat_id == GROUP_LOG:
-                logger.info('-' * 50)
+
                 logger.warning(
                     f'Ignorando armazenamento de chat com ID {chat_id}, pois corresponde ao ID do canal configurado.'
                 )
-                logger.info('-' * 50)
+
                 return
 
             existing_chat = search_group(chat_id)
             if existing_chat:
-                logger.info('-' * 50)
+
                 logger.warning(
                     f'O bate-papo com ID {chat_id} já existe no banco de dados.'
                 )
-                logger.info('-' * 50)
+
                 return
 
             add_chat_db(chat_id, chat_name)
-            logger.info('-' * 50)
+
             logger.success(
                 f'⭐️ O bot foi adicionado no grupo {chat_name} - ({chat_id})'
             )
-            logger.info('-' * 50)
+
             send_new_group_message(message.chat)
 
             if message.chat.type in ['group', 'supergroup', 'channel']:
@@ -94,9 +93,8 @@ def send_group_greeting(message: types.ChatMemberUpdated):
                     reply_markup=markup,
                 )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Error handling group greeting: {e}')
-        logger.info('-' * 50)
 
 
 @bot.message_handler(content_types=['left_chat_member'])
@@ -110,9 +108,8 @@ def on_left_chat_member(message):
                 f'O bot foi removido do grupo {chat_name} - ({chat_id})'
             )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao remover grupo do banco de dados: {e}')
-        logger.info('-' * 50)
 
 
 @bot.message_handler(content_types=['text'])
@@ -137,11 +134,11 @@ def handle_text_messages(message):
                 return
 
             add_chat_db(chat_id, chat_name)
-            logger.info('-' * 50)
+
             logger.success(
                 f'⭐️ O bot foi adicionado no grupo {chat_name} - ({chat_id})'
             )
-            logger.info('-' * 50)
+
             send_new_group_message(message.chat)
 
             if message.chat.type in ['group', 'supergroup', 'channel']:
@@ -159,6 +156,5 @@ def handle_text_messages(message):
                     reply_markup=markup,
                 )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Error handling group greeting: {e}')
-        logger.info('-' * 50)

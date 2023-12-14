@@ -37,22 +37,20 @@ def get_holiday_br_of_the_day(CHANNEL):
                 message += '\n\n💬 Você sabia? Siga o @hoje_na_historia.'
                 bot.send_message(CHANNEL, message)
             else:
-                logger.info('-' * 50)
+
                 logger.warning('Não há informações sobre nascidos hoje.')
-                logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao obter informações:', str(e))
-        logger.info('-' * 50)
 
 
 def hist_channel_holiday_br():
     try:
         get_holiday_br_of_the_day(CHANNEL)
-        logger.info('-' * 50)
+
         logger.success(f'Feriados brasileiro enviada o canal {CHANNEL}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar o trabalho feriados:', str(e))
-        logger.info('-' * 50)

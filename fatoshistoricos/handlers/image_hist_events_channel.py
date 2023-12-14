@@ -35,9 +35,9 @@ def send_historical_events_channel_image(CHANNEL):
             event_year = random_event.get('year', '')
 
         if not events_with_photo:
-            logger.info('-' * 50)
+
             logger.info('Não há eventos com fotos para enviar hoje.')
-            logger.info('-' * 50)
+
             return
 
         random_event = random.choice(events_with_photo)
@@ -47,24 +47,22 @@ def send_historical_events_channel_image(CHANNEL):
 
         photo_url = random_event['pages'][0]['thumbnail']['source']
         bot.send_photo(CHANNEL, photo_url, caption=caption, **options)
-        logger.info('-' * 50)
+
         logger.success(
             f'Evento histórico em foto enviado com sucesso para o canal ID {CHANNEL}.'
         )
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Falha ao enviar evento histórico: {e}')
-        logger.info('-' * 50)
 
 
 def hist_channel_imgs():
     try:
         send_historical_events_channel_image(CHANNEL)
-        logger.info('-' * 50)
+
         logger.success(f'Mensagem enviada o canal {CHANNEL}')
-        logger.info('-' * 50)
+
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error('Erro ao enviar o trabalho imgs:', str(e))
-        logger.info('-' * 50)

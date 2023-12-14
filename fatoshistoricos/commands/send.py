@@ -31,9 +31,8 @@ def cmd_sendon(message):
             bot.reply_to(message, 'Envie o comando novamente.')
 
     except Exception as e:
-        logger.info('-' * 50)
+
         print(f'Erro ao ativar o recebimento dos eventos históricos: {str(e)}')
-        logger.info('-' * 50)
 
 
 @bot.message_handler(commands=['sendoff'])
@@ -61,8 +60,7 @@ def cmd_sendoff(message):
             bot.reply_to(message, 'Envie o comando novamente.')
 
     except Exception as e:
-        logger.info('-' * 50)
+
         print(
             f'Erro ao desativar o recebimento dos eventos históricos: {str(e)}'
         )
-        logger.info('-' * 50)

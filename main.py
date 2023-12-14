@@ -20,6 +20,7 @@ from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
 from fatoshistoricos.database.db import *
 from fatoshistoricos.handlers.birth_of_day import *
+from fatoshistoricos.handlers.count_user_channel import *
 from fatoshistoricos.handlers.curiosity_channel import *
 from fatoshistoricos.handlers.death_of_day import *
 from fatoshistoricos.handlers.event_hist_channel import *
@@ -122,6 +123,9 @@ def set_my_configs():
             except Exception as ex:
                 logger.error(ex)
 
+
+# Quantidade de usuarios no canal
+schedule.every(3).days.do(get_current_count)
 
 # Envio das poll channel
 schedule.every().day.at('09:30').do(send_question)
@@ -392,9 +396,9 @@ def callback_handler(call):
 
 
 def polling_thread():
-    logger.info('-' * 50)
+
     logger.success('Start polling...')
-    logger.info('-' * 50)
+
     bot.polling(allowed_updates=util.update_types)
 
 
@@ -402,6 +406,7 @@ def schedule_thread():
     while True:
         schedule.run_pending()
         sleep(1)
+
 
 polling_thread = threading.Thread(target=polling_thread)
 schedule_thread = threading.Thread(target=schedule_thread)

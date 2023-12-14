@@ -58,9 +58,8 @@ def cmd_add_sudo(message):
                     )
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao adicionar um usuário sudo: {e}')
-        logger.info('-' * 50)
 
 
 # rem_sudo
@@ -112,9 +111,8 @@ def cmd_rem_sudo(message):
                     )
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao remover um usuário sudo: {e}')
-        logger.info('-' * 50)
 
 
 # grupos
@@ -189,9 +187,8 @@ def cmd_group(message):
             bot.answer_callback_query(callback_query_id=query.id)
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a lista de grupos: {e}')
-        logger.info('-' * 50)
 
 
 # stats
@@ -205,9 +202,8 @@ def cmd_stats(message):
         user_stats = f' ☆ {count_users} usuários\n ☆ {count_groups} Grupos'
         bot.reply_to(message, f'\n──❑ 「 Bot Stats 」 ❑──\n\n{user_stats}')
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar o stats do bot: {e}')
-        logger.info('-' * 50)
 
 
 # broadcast
@@ -306,9 +302,8 @@ def cmd_broadcast_pv(message):
                 parse_mode='HTML',
             )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar o broadcast para user: {e}')
-        logger.info('-' * 50)
 
 
 # sendgp
@@ -407,9 +402,8 @@ def cmd_broadcast_chat(message):
                 parse_mode='HTML',
             )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar o broadcast para grupos: {e}')
-        logger.info('-' * 50)
 
 
 # devs
@@ -438,9 +432,8 @@ def cmd_list_devs(message):
 
         bot.reply_to(message, devs_list, parse_mode='HTML')
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a listas de dev: {e}')
-        logger.info('-' * 50)
 
 
 @bot.message_handler(commands=['dev'])
@@ -469,9 +462,8 @@ def cmd_sudo(message):
             f'/fwrds - Lista de grupos com encaminhamento desabilitado\n',
         )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a listas de comandos lde dev: {e}')
-        logger.info('-' * 50)
 
 
 @bot.message_handler(commands=['sys'])
@@ -491,6 +483,5 @@ def cmd_sys(message: types.Message):
             f'\n──❑ 「 System Stats 」 ❑──\n\n ☆ CPU usage: {psutil.cpu_percent(4)} %\n ☆ RAM usage: {psutil.virtual_memory()[2]} %',
         )
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar a listas de comandos lde dev: {e}')
-        logger.info('-' * 50)

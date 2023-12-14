@@ -20,11 +20,11 @@ def cmd_start(message):
             user = search_user(user_id)
             user_info = f"<b>#{BOT_USERNAME} #New_User</b>\n<b>User:</b> {user['first_name']}\n<b>ID:</b> <code>{user['user_id']}</code>\n<b>Username</b>: {user['username']}"
             bot.send_message(GROUP_LOG, user_info)
-            logger.info('-' * 50)
+
             logger.info(
                 f'novo usuário ID: {user["user_id"]} foi criado no banco de dados'
             )
-            logger.info('-' * 50)
+
             return
 
         markup = types.InlineKeyboardMarkup()
@@ -64,6 +64,5 @@ def cmd_start(message):
         )
 
     except Exception as e:
-        logger.info('-' * 50)
+
         logger.error(f'Erro ao enviar o start: {e}')
-        logger.info('-' * 50)
