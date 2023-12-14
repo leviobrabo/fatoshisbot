@@ -16,7 +16,7 @@ def get_current_count():
         logger.info(f'contador: {current_count}')
         current_date = datetime.now()
 
-        last_entry = count_user_channel()
+        last_entry = get_last_entry()
 
         if last_entry:
             difference_days = (current_date - last_entry['date']).days
