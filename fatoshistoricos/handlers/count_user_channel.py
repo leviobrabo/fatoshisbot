@@ -13,6 +13,7 @@ from fatoshistoricos.utils.month import *
 def get_current_count():
     try:
         current_count = bot.get_chat_members_count(CHANNEL_POST)
+        logger.info(f'contador: {current_count}')
         current_date = datetime.now()
 
         last_entry = count_user_channel()
