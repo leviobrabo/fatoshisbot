@@ -125,7 +125,9 @@ def set_my_configs():
 
 
 # Quantidade de usuarios no canal
-schedule.every(3).days.do(get_current_count)
+# schedule.every(3).days.do(get_current_count)
+schedule.every().day.at('12:43').do(get_current_count)
+
 
 # Envio das poll channel
 schedule.every().day.at('09:30').do(send_question)
