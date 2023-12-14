@@ -233,3 +233,14 @@ def search_id_presidente(id):
 
 def search_date_presidente(date):
     return db.presidentes.find_onde({'date': date})
+
+# Operações relacionadas a contador de user
+
+
+def count_user_channel(count, date):
+    return db.counter.insert_one(
+        {
+            'count': count,
+            'date': date
+        }
+    )
