@@ -401,7 +401,8 @@ def callback_handler(call):
 def polling_thread():
 
     logger.success('Start polling...')
-    bot.send_message(GROUP_LOG, f'#{BOTNAME} #ONLINE\n\nBot is on\nVersion: {fatoshist_version}')
+    bot.send_message(
+        GROUP_LOG, f'#{BOT_NAME} #ONLINE\n\nBot is on\nVersion: {fatoshist_version}\nPython version: {python_version}\nLib version: {telebot_version}')
     bot.polling(allowed_updates=util.update_types)
 
 
