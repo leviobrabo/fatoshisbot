@@ -402,7 +402,7 @@ def polling_thread():
 
     logger.success('Start polling...')
     bot.send_message(
-        GROUP_LOG, f'#{BOT_NAME} #ONLINE\n\nBot is on\nVersion: {fatoshist_version}\nPython version: {python_version}\nLib version: {telebot_version}')
+        GROUP_LOG, f'#{BOT_NAME} #ONLINE\n\n<b>Bot is on</b>\n\n<b>Version:</b> {fatoshist_version}\n<b>Python version:</b> {python_version}\n<b>Lib version:</b> {telebot_version}')
     bot.polling(allowed_updates=util.update_types)
 
 
