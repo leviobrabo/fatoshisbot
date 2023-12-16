@@ -16,6 +16,7 @@ from fatoshistoricos.commands.sudo import (cmd_add_sudo, cmd_broadcast_chat,
                                            cmd_list_devs, cmd_rem_sudo,
                                            cmd_stats, cmd_sudo)
 from fatoshistoricos.config import *
+from fatoshistoricos.version import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
 from fatoshistoricos.database.db import *
@@ -400,7 +401,7 @@ def callback_handler(call):
 def polling_thread():
 
     logger.success('Start polling...')
-
+    bot.send_message(GROUP_LOG, f'#{BOTNAME} #ONLINE\n\nBot is on\nVersion: {fatoshist_version}')
     bot.polling(allowed_updates=util.update_types)
 
 
