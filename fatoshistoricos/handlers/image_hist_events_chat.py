@@ -26,6 +26,11 @@ def send_historical_events_group_image(chat_id):
 
         if events:
             random_event = random.choice(events)
+            if random_event.get('pages') and random_event['pages'][0].get('thumbnail'):
+                photo_url = random_event['pages'][0]['thumbnail']['source']
+            else:
+                photo_url = None
+
             event_text = random_event.get('text', '')
             event_year = random_event.get('year', '')
 
@@ -37,10 +42,7 @@ def send_historical_events_group_image(chat_id):
                 )
             )
 
-            if random_event.get('pages') and random_event['pages'][0].get(
-                'thumbnail'
-            ):
-                photo_url = random_event['pages'][0]['thumbnail']['source']
+            if photo_url:
                 bot.send_photo(
                     chat_id,
                     photo_url,
@@ -61,11 +63,9 @@ def send_historical_events_group_image(chat_id):
             )
 
         else:
-
             logger.info('Não há eventos históricos para o dia atual.')
 
     except Exception as e:
-
         logger.error(f'Falha ao enviar evento histórico: {e}')
 
 
@@ -78,11 +78,9 @@ def hist_image_chat_job():
                 try:
                     send_historical_events_group_image(chat_id)
                 except Exception as e:
-
                     logger.error(
                         f'Error sending imgs historical events to group {chat_id}: {str(e)}'
                     )
 
     except Exception as e:
-
-        logger.error('Erro ao fazero envio das imgs para chats:', str(e))
+        logger.error('Erro ao fazer o envio das imagens para chats:', str(e))
