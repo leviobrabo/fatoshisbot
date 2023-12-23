@@ -29,18 +29,14 @@ def send_historical_events_channel_image(CHANNEL):
             if event.get('pages') and event['pages'][0].get('thumbnail')
         ]
 
-        if events:
-            random_event = random.choice(events)
-            event_text = random_event.get('text', '')
-            event_year = random_event.get('year', '')
-
         if not events_with_photo:
-
             logger.info('Não há eventos com fotos para enviar hoje.')
-
             return
 
         random_event = random.choice(events_with_photo)
+        event_text = random_event.get('text', '')
+        event_year = random_event.get('year', '')
+
         caption = f'<b>🖼 | História ilustrada </b>\n\nEm <b>{day} de {get_month_name(month)} de {event_year}</b>\n\n<code>{event_text}</code>\n\n💬 Você sabia? Siga o @hoje_na_historia.'
 
         options = {'parse_mode': 'HTML'}
@@ -53,16 +49,13 @@ def send_historical_events_channel_image(CHANNEL):
         )
 
     except Exception as e:
-
         logger.error(f'Falha ao enviar evento histórico: {e}')
 
 
 def hist_channel_imgs():
     try:
         send_historical_events_channel_image(CHANNEL)
-
-        logger.success(f'Mensagem enviada o canal {CHANNEL}')
+        logger.success(f'Mensagem enviada para o canal {CHANNEL}')
 
     except Exception as e:
-
-        logger.error('Erro ao enviar o trabalho imgs:', str(e))
+        logger.error('Erro ao enviar o trabalho de imagens:', str(e))
