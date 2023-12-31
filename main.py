@@ -16,11 +16,12 @@ from fatoshistoricos.commands.sudo import (cmd_add_sudo, cmd_broadcast_chat,
                                            cmd_list_devs, cmd_rem_sudo,
                                            cmd_stats, cmd_sudo)
 from fatoshistoricos.config import *
-from fatoshistoricos.version import *
 from fatoshistoricos.core.poll_channel import *
 from fatoshistoricos.core.poll_chats import *
 from fatoshistoricos.database.db import *
 from fatoshistoricos.handlers.birth_of_day import *
+from fatoshistoricos.handlers.channel_creation_message import *
+from fatoshistoricos.handlers.christmas_message import *
 from fatoshistoricos.handlers.count_user_channel import *
 from fatoshistoricos.handlers.curiosity_channel import *
 from fatoshistoricos.handlers.death_of_day import *
@@ -31,13 +32,12 @@ from fatoshistoricos.handlers.holiday import *
 from fatoshistoricos.handlers.holiday_brazil import *
 from fatoshistoricos.handlers.image_hist_events_channel import *
 from fatoshistoricos.handlers.image_hist_events_chat import *
+from fatoshistoricos.handlers.new_year_message import *
 from fatoshistoricos.handlers.prase_channel import *
 from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
-from fatoshistoricos.handlers.christmas_message import *
-from fatoshistoricos.handlers.new_year_message import *
-from fatoshistoricos.handlers.channel_creation_message import *
+from fatoshistoricos.version import *
 
 
 def sudos(user_id):
@@ -202,26 +202,31 @@ schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
 # Envio de mensagem de natal
 
+
 def check_date():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 25:
-        schedule.every().day.at("00:00").do(christmas_message)
+        schedule.every().day.at('00:00').do(christmas_message)
+
 
 schedule.every().minute.do(check_date)
 
 # Envio de mensagem de ano novo
 
+
 def check_date_ny():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 31:
-        schedule.every().day.at("23:59").do(new_year_message)
+        schedule.every().day.at('23:59').do(new_year_message)
+
 
 schedule.every().minute.do(check_date)
 schedule.every().minute.do(check_date_ny)
 
 # Envio de mensagem de criação do canal
 
-schedule.every().day.at("22:50").do(agendar_aniversario)
+schedule.every().day.at('22:50').do(agendar_aniversario)
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
@@ -427,7 +432,9 @@ def polling_thread():
 
     logger.success('Start polling...')
     bot.send_message(
-        GROUP_LOG, f'#{BOT_NAME} #ONLINE\n\n<b>Bot is on</b>\n\n<b>Version:</b> {fatoshist_version}\n<b>Python version:</b> {python_version}\n<b>Lib version:</b> {telebot_version}')
+        GROUP_LOG,
+        f'#{BOT_NAME} #ONLINE\n\n<b>Bot is on</b>\n\n<b>Version:</b> {fatoshist_version}\n<b>Python version:</b> {python_version}\n<b>Lib version:</b> {telebot_version}',
+    )
     bot.polling(allowed_updates=util.update_types)
 
 

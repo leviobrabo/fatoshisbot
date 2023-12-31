@@ -26,7 +26,9 @@ def send_historical_events_group_image(chat_id):
 
         if events:
             random_event = random.choice(events)
-            if random_event.get('pages') and random_event['pages'][0].get('thumbnail'):
+            if random_event.get('pages') and random_event['pages'][0].get(
+                'thumbnail'
+            ):
                 photo_url = random_event['pages'][0]['thumbnail']['source']
             else:
                 photo_url = None
