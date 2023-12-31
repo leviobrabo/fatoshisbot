@@ -35,6 +35,7 @@ from fatoshistoricos.handlers.prase_channel import *
 from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
+from fatoshistoricos.handlers.christmas_message import *
 
 
 def sudos(user_id):
@@ -187,15 +188,24 @@ schedule.every().day.at('17:00').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-# schedule.every().day.at('10:00').do(hist_channel_curiosity)
+schedule.every().day.at('10:00').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
-# schedule.every().day.at('21:30').do(hist_channel_frase)
+schedule.every().day.at('21:30').do(hist_channel_frase)
 
-# Enivo dos presidentes no canal
+# Envio dos presidentes no canal
 
-# schedule.every().day.at('20:00').do(enviar_foto_presidente)
+schedule.every().day.at('20:00').do(enviar_foto_presidente)
+
+# Envio de mensagem de natal
+
+def check_date():
+    current_date = datetime.now()
+    if current_date.month == 12 and current_date.day == 25:
+        schedule.every().day.at("00:00").do(christmas_message)
+
+schedule.every().minute.do(check_date)
 
 
 @bot.callback_query_handler(func=lambda call: True)
