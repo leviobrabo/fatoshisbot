@@ -37,6 +37,7 @@ from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
 from fatoshistoricos.handlers.christmas_message import *
 from fatoshistoricos.handlers.new_year_message import *
+from fatoshistoricos.handlers.channel_creation_message import *
 
 
 def sudos(user_id):
@@ -218,6 +219,9 @@ def check_date_ny():
 schedule.every().minute.do(check_date)
 schedule.every().minute.do(check_date_ny)
 
+# Envio de mensagem de criação do canal
+
+schedule.every().day.at("22:50").do(agendar_aniversario)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
