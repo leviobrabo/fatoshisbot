@@ -36,6 +36,7 @@ from fatoshistoricos.handlers.presidents import *
 from fatoshistoricos.loggers import logger
 from fatoshistoricos.utils.welcome import *
 from fatoshistoricos.handlers.christmas_message import *
+from fatoshistoricos.handlers.new_year_message import *
 
 
 def sudos(user_id):
@@ -206,6 +207,16 @@ def check_date():
         schedule.every().day.at("00:00").do(christmas_message)
 
 schedule.every().minute.do(check_date)
+
+# Envio de mensagem de ano novo
+
+def check_date_ny():
+    current_date = datetime.now()
+    if current_date.month == 12 and current_date.day == 31:
+        schedule.every().day.at("23:59").do(new_year_message)
+
+schedule.every().minute.do(check_date)
+schedule.every().minute.do(check_date_ny)
 
 
 @bot.callback_query_handler(func=lambda call: True)
