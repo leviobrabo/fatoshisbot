@@ -18,6 +18,9 @@ def send_historical_events_group_image(chat_id):
         today = datetime.now(pytz.timezone('America/Sao_Paulo'))
         day = today.day
         month = today.month
+        
+        chat = search_group(chat_id)
+        topic = chat.get('thread_id')
 
         response = requests.get(
             f'https://pt.wikipedia.org/api/rest_v1/feed/onthisday/events/{month}/{day}'
@@ -51,6 +54,7 @@ def send_historical_events_group_image(chat_id):
                     caption,
                     parse_mode='HTML',
                     reply_markup=inline_keyboard,
+                    message_thread_id=topic,
                 )
             else:
                 bot.send_message(
@@ -58,6 +62,7 @@ def send_historical_events_group_image(chat_id):
                     caption,
                     parse_mode='HTML',
                     reply_markup=inline_keyboard,
+                    message_thread_id=topic,
                 )
 
             logger.success(
