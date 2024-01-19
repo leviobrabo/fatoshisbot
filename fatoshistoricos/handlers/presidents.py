@@ -85,7 +85,7 @@ def enviar_info_pelo_canal(info_presidente):
             f'<b>Partido:</b> {partido}\n'
             f'<b>Ano de mandato:</b> {ano_de_mandato}\n'
             f'<b>Vice-Presidente:</b> {vice_presidente}\n\n'
-            f'💬 Você sabia? Siga o @hoje_na_historia.'
+            f'<blockquote>💬 Você sabia? Siga o @hoje_na_historia.<blockquote>'
         )
 
         logger.success('Envio de presidente concluído com sucesso!')

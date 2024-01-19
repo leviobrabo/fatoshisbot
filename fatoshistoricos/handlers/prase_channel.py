@@ -26,7 +26,7 @@ def get_frase(CHANNEL):
                 quote = frase.get('quote', '')
                 author = frase.get('author', '')
 
-                message = f'<b>💡 Citação para refletir</b>\n\n"<i>{quote}"</i> - <b>{author}</b>\n\n💬 Você sabia? Siga o @hoje_na_historia.'
+                message = f'<b>💡 Citação para refletir</b>\n\n"<i>{quote}"</i> - <b>{author}</b>\n\n<blockquote>💬 Você sabia? Siga o @hoje_na_historia.<blockquote>'
                 bot.send_message(CHANNEL, message)
             else:
 
