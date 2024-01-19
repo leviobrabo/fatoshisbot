@@ -42,7 +42,7 @@ def get_deaths_of_the_day(CHANNEL):
 
                 message = f'<b>⚰️ |  Mortes neste dia: {day} de {get_month_name(month)}</b>\n\n'
                 message += '\n\n'.join(death_messages)
-                message += '\n\n<blockquote>💬 Você sabia? Siga o @hoje_na_historia.<blockquote>'
+                message += '\n\n<blockquote>💬 Você sabia? Siga o @hoje_na_historia.</blockquote>'
 
                 bot.send_message(CHANNEL, message)
             else:
