@@ -134,17 +134,17 @@ schedule.every(1).days.do(get_current_count)
 
 
 # Envio das poll channel
-schedule.every().day.at('09:30').do(send_question)
-schedule.every().day.at('11:30').do(send_question)
-schedule.every().day.at('14:10').do(send_question)
-schedule.every().day.at('18:30').do(send_question)
+schedule.every().day.at('09:31').do(send_question)
+schedule.every().day.at('11:31').do(send_question)
+schedule.every().day.at('14:11').do(send_question)
+schedule.every().day.at('18:31').do(send_question)
 
 # Envio das poll chats
 
-schedule.every().day.at('10:30').do(send_question_chat)
-schedule.every().day.at('13:30').do(send_question_chat)
-schedule.every().day.at('16:30').do(send_question_chat)
-schedule.every().day.at('18:00').do(send_question_chat)
+schedule.every().day.at('10:31').do(send_question_chat)
+schedule.every().day.at('13:31').do(send_question_chat)
+schedule.every().day.at('16:31').do(send_question_chat)
+schedule.every().day.at('18:01').do(send_question_chat)
 
 # Remove polls do banco de dados
 
@@ -153,79 +153,73 @@ schedule.every().day.at('18:00').do(send_question_chat)
 
 # Envio eventos histórico no chats
 
-schedule.every().day.at('08:00').do(hist_chat_job)
+schedule.every().day.at('08:01').do(hist_chat_job)
 
 # Envio eventos histórico no users
 
-schedule.every().day.at('08:30').do(hist_user_job)
+schedule.every().day.at('08:31').do(hist_user_job)
 
 # Envio eventos histórico no channel
 
-schedule.every().day.at('20:20').do(hist_channel_events)
+schedule.every().day.at('05:01').do(hist_channel_events)
 
 # Envio dos mortos do dia no canal
 
-schedule.every().day.at('15:30').do(hist_channel_death)
+schedule.every().day.at('15:31').do(hist_channel_death)
 
 # Envio dos nascidos do dia no canal
 
-schedule.every().day.at('01:00').do(hist_channel_birth)
+schedule.every().day.at('01:01').do(hist_channel_birth)
 
 # Envio dos feriados do dia no canal
 
-schedule.every().day.at('00:00').do(hist_channel_holiday)
+schedule.every().day.at('00:01').do(hist_channel_holiday)
 
 # Envio de feriados brasileiros no canal
 
-schedule.every().day.at('06:30').do(hist_channel_holiday_br)
+schedule.every().day.at('06:31').do(hist_channel_holiday_br)
 
 # Envio de Fotos históricas no grupo
 
 
-schedule.every().day.at('15:00').do(hist_image_chat_job)
+schedule.every().day.at('15:01').do(hist_image_chat_job)
 
 # Envio de Fotos históricas no canal
 
-schedule.every().day.at('17:00').do(hist_channel_imgs)
+schedule.every().day.at('17:01').do(hist_channel_imgs)
 
 # Envio de curiosidade no canal
 
-schedule.every().day.at('10:00').do(hist_channel_curiosity)
+schedule.every().day.at('10:01').do(hist_channel_curiosity)
 
 # Envio de frases no canal
 
-schedule.every().day.at('21:30').do(hist_channel_frase)
+schedule.every().day.at('21:31').do(hist_channel_frase)
 
 # Envio dos presidentes no canal
 
 # schedule.every().day.at('20:00').do(enviar_foto_presidente)
 
-# Envio de mensagem de natal
-
-
-def check_date():
+# Envio de mensagem de Natal
+def check_christmas():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 25:
         schedule.every().day.at('00:00').do(christmas_message)
 
-
-schedule.every().minute.do(check_date)
-
-# Envio de mensagem de ano novo
-
-
-def check_date_ny():
+# Envio de mensagem de Ano Novo
+def check_new_year():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 31:
         schedule.every().day.at('23:59').do(new_year_message)
 
-
-schedule.every().minute.do(check_date)
-schedule.every().minute.do(check_date_ny)
-
 # Envio de mensagem de criação do canal
+def schedule_channel_anniversary():
+    schedule.every().day.at('22:50').do(agendar_aniversario)
 
-schedule.every().day.at('22:50').do(agendar_aniversario)
+# Schedule checks for Christmas, New Year, and Channel Anniversary
+schedule.every().minute.do(check_christmas)
+schedule.every().minute.do(check_new_year)
+schedule_channel_anniversary()
 
 
 @bot.callback_query_handler(func=lambda call: True)
