@@ -439,8 +439,10 @@ def polling_thread():
 
 
 def schedule_thread():
-    while True:
+   print("iniciando thread")
+   while True:
         schedule.run_pending()
+        print ("finalizado a execução das tarefas")
         sleep(1)
 
 
