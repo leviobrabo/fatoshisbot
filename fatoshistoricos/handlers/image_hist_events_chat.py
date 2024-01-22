@@ -39,7 +39,7 @@ def send_historical_events_group_image(chat_id):
             event_text = random_event.get('text', '')
             event_year = random_event.get('year', '')
 
-            caption = f'<b>Você sabia?</b>\n\nEm <b>{day} de {get_month_name(month)} de {event_year}</b>\n\n<code>{event_text}</code>'
+            caption = f'<b>Você sabia?</b>\n\nEm <b>{day} de {get_month_name(month)} de {event_year}</b>\n\n<blockquote>{event_text}</blockquote>'
             inline_keyboard = types.InlineKeyboardMarkup()
             inline_keyboard.add(
                 types.InlineKeyboardButton(
