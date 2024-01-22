@@ -204,17 +204,17 @@ schedule.every().day.at('21:31').do(hist_channel_frase)
 def check_christmas():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 25:
-        schedule.every().day.at('00:00').do(christmas_message)
+        schedule.every().day.at('00:01').do(christmas_message)
 
 # Envio de mensagem de Ano Novo
 def check_new_year():
     current_date = datetime.now()
     if current_date.month == 12 and current_date.day == 31:
-        schedule.every().day.at('23:59').do(new_year_message)
+        schedule.every().day.at('23:58').do(new_year_message)
 
 # Envio de mensagem de criação do canal
 def schedule_channel_anniversary():
-    schedule.every().day.at('22:50').do(agendar_aniversario)
+    schedule.every().day.at('22:51').do(agendar_aniversario)
 
 # Schedule checks for Christmas, New Year, and Channel Anniversary
 schedule.every().minute.do(check_christmas)
