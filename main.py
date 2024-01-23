@@ -28,6 +28,7 @@ from fatoshistoricos.handlers.death_of_day import *
 from fatoshistoricos.handlers.event_hist_channel import *
 from fatoshistoricos.handlers.event_hist_chats import *
 from fatoshistoricos.handlers.event_hist_users import *
+from fatoshistoricos.handlers.follow_channels import *
 from fatoshistoricos.handlers.holiday import *
 from fatoshistoricos.handlers.holiday_brazil import *
 from fatoshistoricos.handlers.image_hist_events_channel import *
@@ -127,6 +128,7 @@ def set_my_configs():
             except Exception as ex:
                 logger.error(ex)
 
+schedule.every().friday.at('22:30').do(mensagem_ALERTA_CANAL_HISTORIA)
 
 # Quantidade de usuarios no canal
 schedule.every(1).days.do(get_current_count)
