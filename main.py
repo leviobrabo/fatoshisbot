@@ -423,6 +423,7 @@ def polling_thread():
     bot.send_message(
         GROUP_LOG,
         f'#{BOT_NAME} #ONLINE\n\n<b>Bot is on</b>\n\n<b>Version:</b> {fatoshist_version}\n<b>Python version:</b> {python_version}\n<b>Lib version:</b> {telebot_version}',
+        message_thread_id=38551,
     )
     bot.polling(allowed_updates=util.update_types)
 
