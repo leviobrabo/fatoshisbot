@@ -432,7 +432,6 @@ def schedule_thread():
    print("iniciando thread")
    while True:
         schedule.run_pending()
-        print ("finalizado a execução das tarefas")
         sleep(1)
 
 
