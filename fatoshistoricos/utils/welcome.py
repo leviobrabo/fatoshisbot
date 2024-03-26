@@ -2,7 +2,7 @@ from telebot import types
 
 from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.config import *
-from fatoshistoricos.database.db import db, search_group, add_chat_db, remove_chat_db
+from fatoshistoricos.database.db import *
 from fatoshistoricos.loggers import logger
 
 
@@ -62,7 +62,7 @@ def send_group_greeting(message: types.ChatMemberUpdated):
 
                 return
 
-            existing_chat = db.search_group(chat_id)
+            existing_chat = search_group(chat_id)
             if existing_chat:
 
                 logger.warning(
@@ -71,7 +71,7 @@ def send_group_greeting(message: types.ChatMemberUpdated):
 
                 return
 
-            db.add_chat_db(chat_id, chat_name)
+            add_chat_db(chat_id, chat_name)
 
             logger.success(
                 f'⭐️ O bot foi adicionado no grupo {chat_name} - ({chat_id})'
@@ -104,7 +104,7 @@ def on_left_chat_member(message):
         if message.left_chat_member.id == bot.get_me().id:
             chat_id = message.chat.id
             chat_name = message.chat.title
-            db.remove_chat_db(chat_id)
+            remove_chat_db(chat_id)
             logger.success(
                 f'O bot foi removido do grupo {chat_name} - ({chat_id})'
             )
@@ -130,11 +130,11 @@ def handle_text_messages(message):
             if chat_id == GROUP_LOG:
                 return
 
-            existing_chat = db.search_group(chat_id)
+            existing_chat = search_group(chat_id)
             if existing_chat:
                 return
 
-            db.add_chat_db(chat_id, chat_name)
+            add_chat_db(chat_id, chat_name)
 
             logger.success(
                 f'⭐️ O bot foi adicionado no grupo {chat_name} - ({chat_id})'
