@@ -2,7 +2,7 @@ from telebot import types
 
 from fatoshistoricos.bot.bot import bot
 from fatoshistoricos.config import *
-from fatoshistoricos.database.db import *
+from fatoshistoricos.database.db import search_group, add_chat_db, remove_chat_db
 from fatoshistoricos.loggers import logger
 
 
