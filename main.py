@@ -200,7 +200,7 @@ schedule.every().day.at('21:30').do(hist_channel_frase)
 
 # Envio dos presidentes no canal
 
-schedule.every().day.at('20:00').do(enviar_foto_presidente)
+schedule.every().day.at('23:25').do(enviar_foto_presidente)
 
 
 # checar data
