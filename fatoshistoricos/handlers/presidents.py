@@ -39,7 +39,6 @@ def enviar_foto_presidente():
             today_str = today.strftime('%Y-%m-%d')
 
             if ultimo_presidente['date'] != today_str:
-                # Atualiza o registro existente para a data atual e aumenta o ID em 1
 
                 logger.info(
                     'Atualizando informações do último presidente para a data atual.'

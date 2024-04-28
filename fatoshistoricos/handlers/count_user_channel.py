@@ -14,12 +14,12 @@ def get_current_count():
     try:
         current_count = bot.get_chat_members_count(CHANNEL_POST)
         logger.info(f'contador: {current_count}')
-        current_date = datetime.now()
+        current_date = datetime.now().strftime("%d/%m/%Y - %H:%M")
 
         last_entry = get_last_entry()
 
         if last_entry:
-            difference_days = (current_date - last_entry['date']).days
+            difference_days = (datetime.strptime(current_date, "%d/%m/%Y - %H:%M") - last_entry['date']).days
 
             if difference_days >= 3:
                 count_difference = current_count - last_entry['count']
@@ -40,6 +40,9 @@ def get_current_count():
 
                     bot.send_message(GROUP_LOG, message)
                     bot.send_message(OWNER, message)
+                    last_entry['date'] = datetime.strptime(current_date, "%d/%m/%Y - %H:%M")
+                    last_entry['count'] = current_count
+                    update_last_entry(last_entry)
 
                 elif count_difference < 0:
                     message = (
@@ -52,6 +55,10 @@ def get_current_count():
 
                     bot.send_message(GROUP_LOG, message)
                     bot.send_message(OWNER, message)
+                    last_entry['date'] = datetime.strptime(current_date, "%d/%m/%Y - %H:%M")
+                    last_entry['count'] = current_count
+                    update_last_entry(last_entry)
+
                 else:
                     message = (
                         '<b>Hoje na história a quantidade de membros permaneceu a mesma.</b>\n'
@@ -60,6 +67,9 @@ def get_current_count():
 
                     bot.send_message(GROUP_LOG, message)
                     bot.send_message(OWNER, message)
+                    last_entry['date'] = datetime.strptime(current_date, "%d/%m/%Y - %H:%M")
+                    last_entry['count'] = current_count
+                    update_last_entry(last_entry)
         else:
             message = (
                 '<b>Esta é a primeira verificação da quantidade de membros:</b>\n'
