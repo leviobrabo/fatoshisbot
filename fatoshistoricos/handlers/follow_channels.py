@@ -11,7 +11,7 @@ from fatoshistoricos.utils.get_historical import *
 
 def mensagem_ALERTA_CANAL_HISTORIA():
     try:
-        msg = "🌟 📺 **Junte-se ao nosso incrível canal de História!** 📺 🌟\n\n"\
+        msg = "🌟 📺 <b>Junte-se ao nosso incrível canal de História</b> 📺 🌟\n\n"\
             "Amigos, descubram a magia da história através dos nossos canais envolventes e emocionantes! "\
             "Junte-se a nós agora para desfrutar de uma ampla variedade de programas e documentários que levarão você "\
             "em uma emocionante jornada pelas profundezas da história.\n\n"\
